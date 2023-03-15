@@ -422,11 +422,11 @@ def save_and_apply():
             impute = imputes.impute_standard()
             df = impute.fit(df)
 
-        elif tech == "drop_cols":
-            impute = imputes.drop()
-            df = impute.fit_cols(df)
-            # store selected_attributes in session
-            session['selected_attributes'] = list(df.columns)
+        # elif tech == "drop_cols":
+        #     impute = imputes.drop()
+        #     df = impute.fit_cols(df)
+        #     # store selected_attributes in session
+        #     session['selected_attributes'] = list(df.columns)
 
         elif tech == "drop_rows":
             impute = imputes.drop()
