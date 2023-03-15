@@ -1,0 +1,287 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Dashboard {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+<style>
+    body {
+        font-family: sans-serif;
+        background-color: #525f7f;
+    }
+
+    .file-upload {
+        background-color: #525f7f;
+        width: 400px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .file-upload-btn {
+        width: 100%;
+        margin: 0;
+        color: #fff;
+        border: none;
+        padding: 10px;
+        border-radius: 4px;
+        border-bottom: 4px;
+        background-color: #e14eca;
+        border-color: #e14eca;
+        box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+        transition: all .2s ease;
+        outline: none;
+        text-transform: uppercase;
+        font-weight: 700;
+    }
+
+    .file-upload-btn:hover {
+
+        color: #ffffff;
+        transition: all .2s ease;
+        cursor: pointer;
+        background-color: #e14eca;
+        border-color: #e14eca;
+        background-image: linear-gradient(to bottom left, #e14eca, #ba54f5);
+    }
+
+    .file-upload-btn:active {
+        border: 0;
+        transition: all .2s ease;
+    }
+
+    .file-upload-content {
+        display: none;
+        text-align: center;
+    }
+
+    .file-upload-input {
+        position: absolute;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        outline: none;
+        opacity: 0;
+        cursor: pointer;
+    }
+
+    .image-upload-wrap {
+        margin-top: 20px;
+        border: 2px dashed #db2dc0;
+        position: relative;
+    }
+
+    .image-dropping,
+    .image-upload-wrap:hover {
+
+        background-image: linear-gradient(to bottom left, #e14eca, #ba54f5 ) !important;
+        background-image: -moz-linear-gradient(to bottom left, #e14eca, #ba54f5) !important;
+        background-color: #e14eca;
+        border: 2px dashed #db2dc0;
+        color: #ffffff;
+    }
+
+    .image-title-wrap {
+        padding: 0 15px 15px 15px;
+        color: #222;
+    }
+
+    .drag-text {
+        text-align: center;
+    }
+
+    .drag-text h3 {
+        font-weight: 100;
+        text-transform: uppercase;
+        color: #d725bb;
+        color: #ffffff;
+        padding: 60px 0;
+    }
+  
+
+    .file-upload-image {
+        max-height: 200px;
+        max-width: 200px;
+        margin: auto;
+        padding: 20px;
+    }
+
+    .remove-image {
+        width: 200px;
+        margin: 0;
+        color: #fff;
+        background: #cd4535;
+        border: none;
+        padding: 10px;
+        border-radius: 4px;
+        border-bottom: 4px solid #b02818;
+        transition: all .2s ease;
+        outline: none;
+        text-transform: uppercase;
+        font-weight: 700;
+    }
+
+    .remove-image:hover {
+        background: #c13b2a;
+        color: #ffffff;
+        transition: all .2s ease;
+        cursor: pointer;
+    }
+
+    .remove-image:active {
+        border: 0;
+        transition: all .2s ease;
+    }
+</style>
+{% endblock stylesheets %}
+
+
+{% block content %}
+
+
+<div class="content">
+    <!-- upload block -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card card-chart">
+                <div class="card-header">
+                    <h5 class="card-category">Phese One</h5>
+                    <h3 class="card-title"><i class="tim-icons icon-cloud-upload-94"></i>Upload dataset</h3>
+                </div>
+
+                <div class="col-lg ml-auto mr-auto">
+                    <div class="row">
+                        <div class="col-md-9">
+                            <p>here I explain what you can do. I also describe the example dataset and link to their
+                                websites:</br>
+                                <a href="https://archive.ics.uci.edu/ml/datasets/iris"> About the Iris Dataset</a></br>
+                                <a href="https://www.kaggle.com/datasets/nickhould/craft-cans"> About the Beer
+                                    Dataset</a>
+
+                            </p>
+                        </div>
+                        <div>
+                            <script class="jsbin"
+                                src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+                            <div class="file-upload">
+                                <button class="file-upload-btn" type="button"
+                                    onclick="$('.file-upload-input').trigger( 'click' )">Add Image</button>
+
+                                <div class="image-upload-wrap">
+                                    <input class="file-upload-input" type='file' onchange="readURL(this);"
+                                        accept="image/*" />
+                                    <div class="drag-text">
+                                        <h3>Drag and drop a file or select add Image</h3>
+                                    </div>
+                                </div>
+                                <div class="file-upload-content">
+                                    <img class="file-upload-image" src="#" alt="your image" />
+                                    <div class="image-title-wrap">
+                                        <button type="button" onclick="removeUpload()" class="remove-image">Remove <span
+                                                class="image-title">Uploaded Image</span></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <br /><br /><br /><br />
+
+                        <div class="col-md-3">
+                            <form method="post" enctype="multipart/form-data" action="{{ url_for('upload_file') }}"
+                                type="button" class="btn btn-fill btn-primary">
+                                <br /><br /><br />
+                                <i class="tim-icons icon-cloud-upload-94"></i>
+                                <br /><br />Upload your dataset<br /><br /></i>
+                                <input type="file" name="file" />
+                                <input type="submit" value=Upload />
+                            </form>
+
+                        </div>
+                        
+                        
+                        <!-- <div class="col-md-2 btn-group-vertical btn-group-toggle">
+                            <button type="button" class="btn btn-fill btn-primary font-icon-detail-small"  name="iris">                                  
+                                    <i class="tim-icons icon-cloud-upload-94"></i><br/><br/>Iris dataset
+                                    <form method=get action="{{ url_for('upload_sample', name='iris') }}">
+                                        <input class="btn btn-fill btn-info" type=submit value=iris >
+                                    </form>
+                                    
+                            </button>
+                            <button type="button" class="btn btn-fill btn-primary font-icon-detail-small" name="beers">  
+                                    <i class="tim-icons icon-cloud-upload-94"></i><br/><br/>Beer dataset
+                                    <form method=get action="{{ url_for('upload_sample', name='beers') }}">
+                                        <input class="btn btn-fill btn-info" type=submit value=iris >
+                                    </form>
+                            </button>
+                        </div> -->
+
+                    </div></br>
+                </div></br>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+<script>
+    $(document).ready(function () {
+        // Javascript method's body can be found in assets/js/demos.js
+        demo.initDashboardPageCharts();
+
+    });
+</script>
+
+<script>
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('.image-upload-wrap').hide();
+
+                $('.file-upload-image').attr('src', e.target.result);
+                $('.file-upload-content').show();
+
+                $('.image-title').html(input.files[0].name);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+
+        } else {
+            removeUpload();
+        }
+    }
+
+    function removeUpload() {
+        $('.file-upload-input').replaceWith($('.file-upload-input').clone());
+        $('.file-upload-content').hide();
+        $('.image-upload-wrap').show();
+    }
+    $('.image-upload-wrap').bind('dragover', function () {
+        $('.image-upload-wrap').addClass('image-dropping');
+    });
+    $('.image-upload-wrap').bind('dragleave', function () {
+        $('.image-upload-wrap').removeClass('image-dropping');
+    });
+
+</script>
+
+{% endblock javascripts %}

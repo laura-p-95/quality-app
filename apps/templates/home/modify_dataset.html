@@ -1,0 +1,207 @@
+{% block stylesheets %}
+
+<style>
+  /* .portlet-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.portlet {
+    width: 200px;
+    margin: 10px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.portlet-header {
+    padding: 5px;
+    background-color: #f0f0f0;
+    cursor: move;
+}
+
+.portlet-content {
+    padding: 10px;
+}
+
+.portlet.ui-draggable-dragging {
+    opacity: 0.5;
+    z-index: 100;
+} */
+  body {
+    margin: 0;
+    color: black;
+  }
+
+  .container {
+    background-color: #525f7f;
+    padding: 1rem;
+    margin-top: 1rem;
+    color: black;
+  }
+
+  .draggable {
+    padding: 1rem;
+    background-color: #27293d;
+    border: 1px solid black;
+    cursor: move;
+    color: black;
+    width: 45%;
+  }
+
+  .draggable.dragging {
+    opacity: .5;
+  }
+  
+  
+</style>
+
+{% endblock stylesheets %}
+
+{% block content %}
+<div class="content">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header text-center">
+          <h3 class="card-title">
+            Modify your dataset
+          </h3>
+          <h5 class="description">Build your own pipeline to modify your dataset</h5>
+        </div>
+        <div class="card-body">
+          <form method="POST">
+            <div class="row">
+              <div class="col-12">
+                <ul class="nav nav-pills nav-pills-primary">
+                        
+                  <li class="nav-item">
+                      <a class="nav-link active" data-toggle="tab" href="#{{average_rank[0]}}">
+                        {{average_rank[0]}}
+                      </a>
+                  </li>&nbsp;&nbsp;
+                  <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#{{average_rank[0]}}">
+                      {{average_rank[1]}}
+                    </a>
+                </li>&nbsp;&nbsp;
+                <li class="nav-item">
+                  <a class="nav-link active" data-toggle="tab" href="#{{average_rank[0]}}">
+                    {{average_rank[2]}}
+                  </a>
+              </li>
+                  
+                  
+              </ul>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+
+                <div class="container">
+                  <p class="draggable" draggable="true" id="Standard">Impute Standard
+                  <p class="draggable" draggable="true" id="Drop">Drop</p>
+                  <p class="draggable" draggable="true" id="Mean">Impute by the mean</p>
+                  <p class="draggable" draggable="true" id="Std">Impute by the standard deviation</p>
+                  <p class="draggable" draggable="true" id="Mode">Impute by the mode</p>
+                  <p class="draggable" draggable="true" id="Median">Impute by the median</p>
+                  <p class="draggable" draggable="true" id="KNN">Impute by the KNN</p>
+                  <p class="draggable" draggable="true" id="Mice">Impute by the mice</p>
+
+                  <p class="draggable" draggable="true">Impute missing values</p>
+                  <p class="draggable" draggable="true">Delete rows with missing values</p>
+                  <p class="draggable" draggable="true">Delete columns with missing values</p>
+                  <p class="draggable" draggable="true">Outlier correction</p>
+                  <p class="draggable" draggable="true">Remove duplicates</p>
+                  
+                </div>
+                <div class="container">
+  
+                </div>
+              </div>
+              <div class="vr" color="#ced4da" style="height: 250px;"></div>
+              <div class="col-6">
+                <p>{{min_values}}</br>{{max_values}}
+                  </br>{{uniqueness|json_round}}</br>{{accuracy|json_round}}</br>{{completeness|json_round}}
+                  </br>
+  
+                </p>
+  
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg ml-auto mr-auto">
+                <div class="text-center">
+                  <input class="btn btn-fill btn-primary float-right " type="submit" name="submit"
+                    value="Download your csv file">
+  
+                </div>
+              </div>
+            </div>
+  
+          </form>
+        </div>
+        
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock content %}
+{% block javascripts %}
+
+<!-- jQuery library: This is a JavaScript library that provides a variety of useful functions for interacting with the Document Object Model (DOM).
+<script src="{{ url_for('static', filename='jquery.js') }}"></script>
+
+jQuery UI library: This is a set of user interface widgets and effects built on top of jQuery.
+<link rel="stylesheet" href="{{ url_for('static', filename='jquery-ui.css') }}">
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js"></script> -->
+
+<script>
+  const draggables = document.querySelectorAll('.draggable')
+  const containers = document.querySelectorAll('.container')
+
+  draggables.forEach(draggable => {
+    draggable.addEventListener('dragstart', () => {
+      draggable.classList.add('dragging')
+    })
+
+    draggable.addEventListener('dragend', () => {
+      draggable.classList.remove('dragging')
+    })
+  })
+
+  containers.forEach(container => {
+    container.addEventListener('dragover', e => {
+      e.preventDefault()
+      const afterElement = getDragAfterElement(container, e.clientY)
+      const draggable = document.querySelector('.dragging')
+      if (afterElement == null) {
+        container.appendChild(draggable)
+      } else {
+        container.insertBefore(draggable, afterElement)
+      }
+    })
+  })
+
+  function getDragAfterElement(container, y) {
+    const draggableElements = [...container.querySelectorAll('.draggable:not(.dragging)')]
+
+    return draggableElements.reduce((closest, child) => {
+      const box = child.getBoundingClientRect()
+      const offset = y - box.top - box.height / 2
+      if (offset < 0 && offset > closest.offset) {
+        return { offset: offset, element: child }
+      } else {
+        return closest
+      }
+    }, { offset: Number.NEGATIVE_INFINITY }).element
+  }
+</script>
+<!-- Specific Page JS goes HERE  -->
+
+
+{% endblock javascripts %}

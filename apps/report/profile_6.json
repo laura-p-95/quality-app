@@ -1,0 +1,382 @@
+{
+    "analysis": {
+        "title": "Pandas Profiling Report",
+        "date_start": "2023-03-15 02:37:50.854284",
+        "date_end": "2023-03-15 02:37:51.040288",
+        "duration": "0:00:00.186004"
+    },
+    "table": {
+        "n": 36,
+        "n_var": 1,
+        "memory_size": 416,
+        "record_size": 11.555555555555555,
+        "n_cells_missing": 0,
+        "n_vars_with_missing": 0,
+        "n_vars_all_missing": 0,
+        "p_cells_missing": 0.0,
+        "types": {
+            "Categorical": 1
+        },
+        "n_duplicates": 0,
+        "p_duplicates": 0.0
+    },
+    "variables": {
+        "Month": {
+            "n_distinct": 36,
+            "p_distinct": 1.0,
+            "is_unique": true,
+            "n_unique": 36,
+            "p_unique": 1.0,
+            "type": "Categorical",
+            "hashable": true,
+            "value_counts_without_nan": {
+                "1-01": 1,
+                "1-02": 1,
+                "2-09": 1,
+                "2-10": 1,
+                "2-11": 1,
+                "2-12": 1,
+                "3-01": 1,
+                "3-02": 1,
+                "3-03": 1,
+                "3-04": 1,
+                "3-05": 1,
+                "3-06": 1,
+                "3-07": 1,
+                "3-08": 1,
+                "3-09": 1,
+                "3-10": 1,
+                "3-11": 1,
+                "2-08": 1,
+                "2-07": 1,
+                "2-06": 1,
+                "1-09": 1,
+                "1-03": 1,
+                "1-04": 1,
+                "1-05": 1,
+                "1-06": 1,
+                "1-07": 1,
+                "1-08": 1,
+                "1-10": 1,
+                "2-05": 1,
+                "1-11": 1,
+                "1-12": 1,
+                "2-01": 1,
+                "2-02": 1,
+                "2-03": 1,
+                "2-04": 1,
+                "3-12": 1
+            },
+            "value_counts_index_sorted": {
+                "1-01": 1,
+                "1-02": 1,
+                "1-03": 1,
+                "1-04": 1,
+                "1-05": 1,
+                "1-06": 1,
+                "1-07": 1,
+                "1-08": 1,
+                "1-09": 1,
+                "1-10": 1,
+                "1-11": 1,
+                "1-12": 1,
+                "2-01": 1,
+                "2-02": 1,
+                "2-03": 1,
+                "2-04": 1,
+                "2-05": 1,
+                "2-06": 1,
+                "2-07": 1,
+                "2-08": 1,
+                "2-09": 1,
+                "2-10": 1,
+                "2-11": 1,
+                "2-12": 1,
+                "3-01": 1,
+                "3-02": 1,
+                "3-03": 1,
+                "3-04": 1,
+                "3-05": 1,
+                "3-06": 1,
+                "3-07": 1,
+                "3-08": 1,
+                "3-09": 1,
+                "3-10": 1,
+                "3-11": 1,
+                "3-12": 1
+            },
+            "ordering": true,
+            "n_missing": 0,
+            "n": 36,
+            "p_missing": 0.0,
+            "count": 36,
+            "memory_size": 416,
+            "imbalance": -2.220446049250313e-16,
+            "first_rows": {
+                "0": "1-01",
+                "1": "1-02",
+                "2": "1-03",
+                "3": "1-04",
+                "4": "1-05"
+            },
+            "chi_squared": {
+                "statistic": 0.0,
+                "pvalue": 1.0
+            },
+            "max_length": 4,
+            "mean_length": 4.0,
+            "median_length": 4,
+            "min_length": 4,
+            "length_histogram": {
+                "4": 36
+            },
+            "histogram_length": {
+                "counts": [
+                    36
+                ],
+                "bin_edges": [
+                    3.5,
+                    4.5
+                ]
+            },
+            "n_characters_distinct": 11,
+            "n_characters": 144,
+            "character_counts": {
+                "-": 36,
+                "0": 30,
+                "1": 27,
+                "2": 18,
+                "3": 15,
+                "9": 3,
+                "4": 3,
+                "5": 3,
+                "6": 3,
+                "7": 3,
+                "8": 3
+            },
+            "category_alias_values": {
+                "-": "Dash_Punctuation",
+                "0": "Decimal_Number",
+                "1": "Decimal_Number",
+                "2": "Decimal_Number",
+                "3": "Decimal_Number",
+                "9": "Decimal_Number",
+                "4": "Decimal_Number",
+                "5": "Decimal_Number",
+                "6": "Decimal_Number",
+                "7": "Decimal_Number",
+                "8": "Decimal_Number"
+            },
+            "block_alias_values": {
+                "-": "ASCII",
+                "0": "ASCII",
+                "1": "ASCII",
+                "2": "ASCII",
+                "3": "ASCII",
+                "9": "ASCII",
+                "4": "ASCII",
+                "5": "ASCII",
+                "6": "ASCII",
+                "7": "ASCII",
+                "8": "ASCII"
+            },
+            "block_alias_counts": {
+                "ASCII": 144
+            },
+            "n_block_alias": 1,
+            "block_alias_char_counts": {
+                "ASCII": {
+                    "-": 36,
+                    "0": 30,
+                    "1": 27,
+                    "2": 18,
+                    "3": 15,
+                    "9": 3,
+                    "4": 3,
+                    "5": 3,
+                    "6": 3,
+                    "7": 3,
+                    "8": 3
+                }
+            },
+            "script_counts": {
+                "Common": 144
+            },
+            "n_scripts": 1,
+            "script_char_counts": {
+                "Common": {
+                    "-": 36,
+                    "0": 30,
+                    "1": 27,
+                    "2": 18,
+                    "3": 15,
+                    "9": 3,
+                    "4": 3,
+                    "5": 3,
+                    "6": 3,
+                    "7": 3,
+                    "8": 3
+                }
+            },
+            "category_alias_counts": {
+                "Decimal Number": 108,
+                "Dash Punctuation": 36
+            },
+            "n_category": 2,
+            "category_alias_char_counts": {
+                "Dash_Punctuation": {
+                    "-": 36
+                },
+                "Decimal_Number": {
+                    "0": 30,
+                    "1": 27,
+                    "2": 18,
+                    "3": 15,
+                    "9": 3,
+                    "4": 3,
+                    "5": 3,
+                    "6": 3,
+                    "7": 3,
+                    "8": 3
+                }
+            },
+            "word_counts": {
+                "1-01": 1,
+                "1-02": 1,
+                "1-09": 1,
+                "1-03": 1,
+                "1-04": 1,
+                "1-05": 1,
+                "1-06": 1,
+                "1-07": 1,
+                "1-08": 1,
+                "1-10": 1,
+                "2-05": 1,
+                "1-11": 1,
+                "1-12": 1,
+                "2-01": 1,
+                "2-02": 1,
+                "2-03": 1,
+                "2-04": 1,
+                "2-06": 1,
+                "2-07": 1,
+                "2-08": 1,
+                "3-03": 1,
+                "2-09": 1,
+                "2-10": 1,
+                "2-11": 1,
+                "2-12": 1,
+                "3-01": 1,
+                "3-02": 1,
+                "3-04": 1,
+                "3-11": 1,
+                "3-05": 1,
+                "3-06": 1,
+                "3-07": 1,
+                "3-08": 1,
+                "3-09": 1,
+                "3-10": 1,
+                "3-12": 1
+            }
+        }
+    },
+    "scatter": {},
+    "correlations": {},
+    "missing": {
+        "bar": {
+            "name": "Count",
+            "caption": "A simple visualization of nullity by column.",
+            "matrix": "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"no\"?>\n<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\"\n  \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n<svg xmlns:xlink=\"http://www.w3.org/1999/xlink\" width=\"720pt\" height=\"360pt\" viewBox=\"0 0 720 360\" xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\">\n <metadata>\n  <rdf:RDF xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:cc=\"http://creativecommons.org/ns#\" xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\">\n   <cc:Work>\n    <dc:type rdf:resource=\"http://purl.org/dc/dcmitype/StillImage\"/>\n    <dc:date>2023-03-15T03:37:50.918284</dc:date>\n    <dc:format>image/svg+xml</dc:format>\n    <dc:creator>\n     <cc:Agent>\n      <dc:title>Matplotlib v3.6.3, https://matplotlib.org/</dc:title>\n     </cc:Agent>\n    </dc:creator>\n   </cc:Work>\n  </rdf:RDF>\n </metadata>\n <defs>\n  <style type=\"text/css\">*{stroke-linejoin: round; stroke-linecap: butt}</style>\n </defs>\n <g id=\"figure_1\">\n  <g id=\"patch_1\">\n   <path d=\"M 0 360 \nL 720 360 \nL 720 0 \nL 0 0 \nz\n\" style=\"fill: #ffffff\"/>\n  </g>\n  <g id=\"axes_1\">\n   <g id=\"patch_2\">\n    <path d=\"M 613.384615 252 \nL 648 252 \nL 648 72 \nL 613.384615 72 \nz\n\" style=\"fill: #ffffff\"/>\n   </g>\n   <g id=\"matplotlib.axis_1\"/>\n   <g id=\"matplotlib.axis_2\"/>\n   <g id=\"line2d_1\">\n    <path d=\"M 634.153846 252 \nL 634.153846 246.857143 \nL 634.153846 241.714286 \nL 634.153846 236.571429 \nL 627.230769 231.428571 \nL 634.153846 226.285714 \nL 634.153846 221.142857 \nL 634.153846 216 \nL 634.153846 210.857143 \nL 634.153846 205.714286 \nL 634.153846 200.571429 \nL 634.153846 195.428571 \nL 627.230769 190.285714 \nL 627.230769 185.142857 \nL 634.153846 180 \nL 634.153846 174.857143 \nL 634.153846 169.714286 \nL 634.153846 164.571429 \nL 634.153846 159.428571 \nL 634.153846 154.285714 \nL 634.153846 149.142857 \nL 627.230769 144 \nL 634.153846 138.857143 \nL 634.153846 133.714286 \nL 634.153846 128.571429 \nL 634.153846 123.428571 \nL 627.230769 118.285714 \nL 634.153846 113.142857 \nL 634.153846 108 \nL 634.153846 102.857143 \nL 634.153846 97.714286 \nL 634.153846 92.571429 \nL 627.230769 87.428571 \nL 634.153846 82.285714 \nL 634.153846 77.142857 \nL 634.153846 72 \n\" clip-path=\"url(#pb0011ae75c)\" style=\"fill: none; stroke: #540f49; stroke-width: 1.5; stroke-linecap: square\"/>\n   </g>\n   <g id=\"line2d_2\">\n    <defs>\n     <path id=\"m49d25e6735\" d=\"M 0 2.5 \nC 0.663008 2.5 1.29895 2.236584 1.767767 1.767767 \nC 2.236584 1.29895 2.5 0.663008 2.5 0 \nC 2.5 -0.663008 2.236584 -1.29895 1.767767 -1.767767 \nC 1.29895 -2.236584 0.663008 -2.5 0 -2.5 \nC -0.663008 -2.5 -1.29895 -2.236584 -1.767767 -1.767767 \nC -2.236584 -1.29895 -2.5 -0.663008 -2.5 0 \nC -2.5 0.663008 -2.236584 1.29895 -1.767767 1.767767 \nC -1.29895 2.236584 -0.663008 2.5 0 2.5 \nz\n\" style=\"stroke: #540f49\"/>\n    </defs>\n    <g clip-path=\"url(#pb0011ae75c)\">\n     <use xlink:href=\"#m49d25e6735\" x=\"627.230769\" y=\"231.428571\" style=\"fill: #540f49; stroke: #540f49\"/>\n    </g>\n   </g>\n   <g id=\"line2d_3\">\n    <g clip-path=\"url(#pb0011ae75c)\">\n     <use xlink:href=\"#m49d25e6735\" x=\"634.153846\" y=\"252\" style=\"fill: #540f49; stroke: #540f49\"/>\n    </g>\n   </g>\n   <g id=\"text_1\">\n    <!-- 2 -->\n    <g transform=\"translate(648 254.585156) scale(0.1 -0.1)\">\n     <defs>\n      <path id=\"ArialMT-32\" d=\"M 3222 541 \nL 3222 0 \nL 194 0 \nQ 188 203 259 391 \nQ 375 700 629 1000 \nQ 884 1300 1366 1694 \nQ 2113 2306 2375 2664 \nQ 2638 3022 2638 3341 \nQ 2638 3675 2398 3904 \nQ 2159 4134 1775 4134 \nQ 1369 4134 1125 3890 \nQ 881 3647 878 3216 \nL 300 3275 \nQ 359 3922 746 4261 \nQ 1134 4600 1788 4600 \nQ 2447 4600 2831 4234 \nQ 3216 3869 3216 3328 \nQ 3216 3053 3103 2787 \nQ 2991 2522 2730 2228 \nQ 2469 1934 1863 1422 \nQ 1356 997 1212 845 \nQ 1069 694 975 541 \nL 3222 541 \nz\n\" transform=\"scale(0.015625)\"/>\n     </defs>\n     <use xlink:href=\"#ArialMT-32\"/>\n    </g>\n   </g>\n   <g id=\"text_2\">\n    <!-- 1 -->\n    <g transform=\"translate(607.823678 234.013728) scale(0.1 -0.1)\">\n     <defs>\n      <path id=\"ArialMT-31\" d=\"M 2384 0 \nL 1822 0 \nL 1822 3584 \nQ 1619 3391 1289 3197 \nQ 959 3003 697 2906 \nL 697 3450 \nQ 1169 3672 1522 3987 \nQ 1875 4303 2022 4600 \nL 2384 4600 \nL 2384 0 \nz\n\" transform=\"scale(0.015625)\"/>\n     </defs>\n     <use xlink:href=\"#ArialMT-31\"/>\n    </g>\n   </g>\n  </g>\n  <g id=\"axes_2\">\n   <g id=\"patch_3\">\n    <path d=\"M 72 252 \nL 591.230769 252 \nL 591.230769 72 \nL 72 72 \nz\n\" style=\"fill: #ffffff\"/>\n   </g>\n   <g clip-path=\"url(#pc9263420df)\">\n    <image xlink:href=\"data:image/png;base64,\niVBORw0KGgoAAAANSUhEUgAAAAIAAAAkCAYAAACjQ+sPAAAALElEQVR4nGMM5vf4z8DAwMDEAAWojDUftjMwElBDoS7yrMBuDlyEWgYSYw4ArNkV2NeWs9QAAAAASUVORK5CYII=\" id=\"image29d1f13fff\" transform=\"matrix(520 0 0 5 72 72)\" style=\"image-rendering:crisp-edges;image-rendering:pixelated\" width=\"2\" height=\"36\"/>\n   </g>\n   <g id=\"patch_4\">\n    <path d=\"M 201.807692 74.5 \nL 461.423077 74.5 \nL 461.423077 79.5 \nL 201.807692 79.5 \nz\n\" clip-path=\"url(#pc9263420df)\" style=\"fill: #377eb8; stroke: #ffffff; stroke-width: 0.3; stroke-linejoin: miter\"/>\n   </g>\n   <g id=\"matplotlib.axis_3\">\n    <g id=\"xtick_1\">\n     <g id=\"text_3\">\n      <!-- Month -->\n      <g transform=\"translate(304.242176 291.12596) rotate(-45) scale(0.13 -0.13)\">\n       <defs>\n        <path id=\"ArialMT-4d\" d=\"M 475 0 \nL 475 4581 \nL 1388 4581 \nL 2472 1338 \nQ 2622 884 2691 659 \nQ 2769 909 2934 1394 \nL 4031 4581 \nL 4847 4581 \nL 4847 0 \nL 4263 0 \nL 4263 3834 \nL 2931 0 \nL 2384 0 \nL 1059 3900 \nL 1059 0 \nL 475 0 \nz\n\" transform=\"scale(0.015625)\"/>\n        <path id=\"ArialMT-6f\" d=\"M 213 1659 \nQ 213 2581 725 3025 \nQ 1153 3394 1769 3394 \nQ 2453 3394 2887 2945 \nQ 3322 2497 3322 1706 \nQ 3322 1066 3130 698 \nQ 2938 331 2570 128 \nQ 2203 -75 1769 -75 \nQ 1072 -75 642 372 \nQ 213 819 213 1659 \nz\nM 791 1659 \nQ 791 1022 1069 705 \nQ 1347 388 1769 388 \nQ 2188 388 2466 706 \nQ 2744 1025 2744 1678 \nQ 2744 2294 2464 2611 \nQ 2184 2928 1769 2928 \nQ 1347 2928 1069 2612 \nQ 791 2297 791 1659 \nz\n\" transform=\"scale(0.015625)\"/>\n        <path id=\"ArialMT-6e\" d=\"M 422 0 \nL 422 3319 \nL 928 3319 \nL 928 2847 \nQ 1294 3394 1984 3394 \nQ 2284 3394 2536 3286 \nQ 2788 3178 2913 3003 \nQ 3038 2828 3088 2588 \nQ 3119 2431 3119 2041 \nL 3119 0 \nL 2556 0 \nL 2556 2019 \nQ 2556 2363 2490 2533 \nQ 2425 2703 2258 2804 \nQ 2091 2906 1866 2906 \nQ 1506 2906 1245 2678 \nQ 984 2450 984 1813 \nL 984 0 \nL 422 0 \nz\n\" transform=\"scale(0.015625)\"/>\n        <path id=\"ArialMT-74\" d=\"M 1650 503 \nL 1731 6 \nQ 1494 -44 1306 -44 \nQ 1000 -44 831 53 \nQ 663 150 594 308 \nQ 525 466 525 972 \nL 525 2881 \nL 113 2881 \nL 113 3319 \nL 525 3319 \nL 525 4141 \nL 1084 4478 \nL 1084 3319 \nL 1650 3319 \nL 1650 2881 \nL 1084 2881 \nL 1084 941 \nQ 1084 700 1114 631 \nQ 1144 563 1211 522 \nQ 1278 481 1403 481 \nQ 1497 481 1650 503 \nz\n\" transform=\"scale(0.015625)\"/>\n        <path id=\"ArialMT-68\" d=\"M 422 0 \nL 422 4581 \nL 984 4581 \nL 984 2938 \nQ 1378 3394 1978 3394 \nQ 2347 3394 2619 3248 \nQ 2891 3103 3008 2847 \nQ 3125 2591 3125 2103 \nL 3125 0 \nL 2563 0 \nL 2563 2103 \nQ 2563 2525 2380 2717 \nQ 2197 2909 1863 2909 \nQ 1613 2909 1392 2779 \nQ 1172 2650 1078 2428 \nQ 984 2206 984 1816 \nL 984 0 \nL 422 0 \nz\n\" transform=\"scale(0.015625)\"/>\n       </defs>\n       <use xlink:href=\"#ArialMT-4d\"/>\n       <use xlink:href=\"#ArialMT-6f\" x=\"83.300781\"/>\n       <use xlink:href=\"#ArialMT-6e\" x=\"138.916016\"/>\n       <use xlink:href=\"#ArialMT-74\" x=\"194.53125\"/>\n       <use xlink:href=\"#ArialMT-68\" x=\"222.314453\"/>\n      </g>\n     </g>\n    </g>\n   </g>\n   <g id=\"matplotlib.axis_4\">\n    <g id=\"ytick_1\">\n     <g id=\"text_4\">\n      <!-- 1 -->\n      <g transform=\"translate(57.770781 79.152578) scale(0.13 -0.13)\">\n       <use xlink:href=\"#ArialMT-31\"/>\n      </g>\n     </g>\n    </g>\n    <g id=\"ytick_2\">\n     <g id=\"text_5\">\n      <!-- 36 -->\n      <g transform=\"translate(50.541562 254.152578) scale(0.13 -0.13)\">\n       <defs>\n        <path id=\"ArialMT-33\" d=\"M 269 1209 \nL 831 1284 \nQ 928 806 1161 595 \nQ 1394 384 1728 384 \nQ 2125 384 2398 659 \nQ 2672 934 2672 1341 \nQ 2672 1728 2419 1979 \nQ 2166 2231 1775 2231 \nQ 1616 2231 1378 2169 \nL 1441 2663 \nQ 1497 2656 1531 2656 \nQ 1891 2656 2178 2843 \nQ 2466 3031 2466 3422 \nQ 2466 3731 2256 3934 \nQ 2047 4138 1716 4138 \nQ 1388 4138 1169 3931 \nQ 950 3725 888 3313 \nL 325 3413 \nQ 428 3978 793 4289 \nQ 1159 4600 1703 4600 \nQ 2078 4600 2393 4439 \nQ 2709 4278 2876 4000 \nQ 3044 3722 3044 3409 \nQ 3044 3113 2884 2869 \nQ 2725 2625 2413 2481 \nQ 2819 2388 3044 2092 \nQ 3269 1797 3269 1353 \nQ 3269 753 2831 336 \nQ 2394 -81 1725 -81 \nQ 1122 -81 723 278 \nQ 325 638 269 1209 \nz\n\" transform=\"scale(0.015625)\"/>\n        <path id=\"ArialMT-36\" d=\"M 3184 3459 \nL 2625 3416 \nQ 2550 3747 2413 3897 \nQ 2184 4138 1850 4138 \nQ 1581 4138 1378 3988 \nQ 1113 3794 959 3422 \nQ 806 3050 800 2363 \nQ 1003 2672 1297 2822 \nQ 1591 2972 1913 2972 \nQ 2475 2972 2870 2558 \nQ 3266 2144 3266 1488 \nQ 3266 1056 3080 686 \nQ 2894 316 2569 119 \nQ 2244 -78 1831 -78 \nQ 1128 -78 684 439 \nQ 241 956 241 2144 \nQ 241 3472 731 4075 \nQ 1159 4600 1884 4600 \nQ 2425 4600 2770 4297 \nQ 3116 3994 3184 3459 \nz\nM 888 1484 \nQ 888 1194 1011 928 \nQ 1134 663 1356 523 \nQ 1578 384 1822 384 \nQ 2178 384 2434 671 \nQ 2691 959 2691 1453 \nQ 2691 1928 2437 2201 \nQ 2184 2475 1800 2475 \nQ 1419 2475 1153 2201 \nQ 888 1928 888 1484 \nz\n\" transform=\"scale(0.015625)\"/>\n       </defs>\n       <use xlink:href=\"#ArialMT-33\"/>\n       <use xlink:href=\"#ArialMT-36\" x=\"55.615234\"/>\n      </g>\n     </g>\n    </g>\n   </g>\n   <g id=\"line2d_4\">\n    <path d=\"M 591.230769 252 \nL 591.230769 72 \n\" clip-path=\"url(#pc9263420df)\" style=\"fill: none; stroke: #ffffff; stroke-width: 1.5; stroke-linecap: square\"/>\n   </g>\n  </g>\n  <g id=\"axes_3\">\n   <g id=\"matplotlib.axis_5\">\n    <g id=\"xtick_2\">\n     <g id=\"text_6\">\n      <!-- 36 -->\n      <g style=\"fill: #262626\" transform=\"translate(338.195124 59.673013) rotate(-45) scale(0.13 -0.13)\">\n       <use xlink:href=\"#ArialMT-33\"/>\n       <use xlink:href=\"#ArialMT-36\" x=\"55.615234\"/>\n      </g>\n     </g>\n    </g>\n   </g>\n  </g>\n </g>\n <defs>\n  <clipPath id=\"pb0011ae75c\">\n   <rect x=\"613.384615\" y=\"72\" width=\"34.615385\" height=\"180\"/>\n  </clipPath>\n  <clipPath id=\"pc9263420df\">\n   <rect x=\"72\" y=\"72\" width=\"519.230769\" height=\"180\"/>\n  </clipPath>\n </defs>\n</svg>\n"
+        },
+        "matrix": {
+            "name": "Matrix",
+            "caption": "Nullity matrix is a data-dense display which lets you quickly visually pick out patterns in data completion.",
+            "matrix": "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"no\"?>\n<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\"\n  \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n<svg xmlns:xlink=\"http://www.w3.org/1999/xlink\" width=\"720pt\" height=\"288pt\" viewBox=\"0 0 720 288\" xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\">\n <metadata>\n  <rdf:RDF xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:cc=\"http://creativecommons.org/ns#\" xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\">\n   <cc:Work>\n    <dc:type rdf:resource=\"http://purl.org/dc/dcmitype/StillImage\"/>\n    <dc:date>2023-03-15T03:37:51.003287</dc:date>\n    <dc:format>image/svg+xml</dc:format>\n    <dc:creator>\n     <cc:Agent>\n      <dc:title>Matplotlib v3.6.3, https://matplotlib.org/</dc:title>\n     </cc:Agent>\n    </dc:creator>\n   </cc:Work>\n  </rdf:RDF>\n </metadata>\n <defs>\n  <style type=\"text/css\">*{stroke-linejoin: round; stroke-linecap: butt}</style>\n </defs>\n <g id=\"figure_1\">\n  <g id=\"patch_1\">\n   <path d=\"M 0 288 \nL 720 288 \nL 720 0 \nL 0 0 \nz\n\" style=\"fill: #ffffff\"/>\n  </g>\n  <g id=\"axes_1\">\n   <g id=\"patch_2\">\n    <path d=\"M 72 230.4 \nL 648 230.4 \nL 648 86.4 \nL 72 86.4 \nz\n\" style=\"fill: #ffffff\"/>\n   </g>\n   <g clip-path=\"url(#p7551e60f85)\">\n    <image xlink:href=\"data:image/png;base64,\niVBORw0KGgoAAAANSUhEUgAAAAEAAAAkCAYAAABIdFAMAAAAFElEQVR4nGMwr9vxn4mBgYFh6BAAxfgCszbjmtoAAAAASUVORK5CYII=\" id=\"image24c0de5e25\" transform=\"matrix(576 0 0 4 72 86.4)\" style=\"image-rendering:crisp-edges;image-rendering:pixelated\" width=\"1\" height=\"36\"/>\n   </g>\n   <g id=\"matplotlib.axis_1\">\n    <g id=\"xtick_1\">\n     <g id=\"text_1\">\n      <!-- Month -->\n      <g style=\"fill: #262626\" transform=\"translate(365.263791 74.43841) rotate(-45) scale(0.104 -0.104)\">\n       <defs>\n        <path id=\"ArialMT-4d\" d=\"M 475 0 \nL 475 4581 \nL 1388 4581 \nL 2472 1338 \nQ 2622 884 2691 659 \nQ 2769 909 2934 1394 \nL 4031 4581 \nL 4847 4581 \nL 4847 0 \nL 4263 0 \nL 4263 3834 \nL 2931 0 \nL 2384 0 \nL 1059 3900 \nL 1059 0 \nL 475 0 \nz\n\" transform=\"scale(0.015625)\"/>\n        <path id=\"ArialMT-6f\" d=\"M 213 1659 \nQ 213 2581 725 3025 \nQ 1153 3394 1769 3394 \nQ 2453 3394 2887 2945 \nQ 3322 2497 3322 1706 \nQ 3322 1066 3130 698 \nQ 2938 331 2570 128 \nQ 2203 -75 1769 -75 \nQ 1072 -75 642 372 \nQ 213 819 213 1659 \nz\nM 791 1659 \nQ 791 1022 1069 705 \nQ 1347 388 1769 388 \nQ 2188 388 2466 706 \nQ 2744 1025 2744 1678 \nQ 2744 2294 2464 2611 \nQ 2184 2928 1769 2928 \nQ 1347 2928 1069 2612 \nQ 791 2297 791 1659 \nz\n\" transform=\"scale(0.015625)\"/>\n        <path id=\"ArialMT-6e\" d=\"M 422 0 \nL 422 3319 \nL 928 3319 \nL 928 2847 \nQ 1294 3394 1984 3394 \nQ 2284 3394 2536 3286 \nQ 2788 3178 2913 3003 \nQ 3038 2828 3088 2588 \nQ 3119 2431 3119 2041 \nL 3119 0 \nL 2556 0 \nL 2556 2019 \nQ 2556 2363 2490 2533 \nQ 2425 2703 2258 2804 \nQ 2091 2906 1866 2906 \nQ 1506 2906 1245 2678 \nQ 984 2450 984 1813 \nL 984 0 \nL 422 0 \nz\n\" transform=\"scale(0.015625)\"/>\n        <path id=\"ArialMT-74\" d=\"M 1650 503 \nL 1731 6 \nQ 1494 -44 1306 -44 \nQ 1000 -44 831 53 \nQ 663 150 594 308 \nQ 525 466 525 972 \nL 525 2881 \nL 113 2881 \nL 113 3319 \nL 525 3319 \nL 525 4141 \nL 1084 4478 \nL 1084 3319 \nL 1650 3319 \nL 1650 2881 \nL 1084 2881 \nL 1084 941 \nQ 1084 700 1114 631 \nQ 1144 563 1211 522 \nQ 1278 481 1403 481 \nQ 1497 481 1650 503 \nz\n\" transform=\"scale(0.015625)\"/>\n        <path id=\"ArialMT-68\" d=\"M 422 0 \nL 422 4581 \nL 984 4581 \nL 984 2938 \nQ 1378 3394 1978 3394 \nQ 2347 3394 2619 3248 \nQ 2891 3103 3008 2847 \nQ 3125 2591 3125 2103 \nL 3125 0 \nL 2563 0 \nL 2563 2103 \nQ 2563 2525 2380 2717 \nQ 2197 2909 1863 2909 \nQ 1613 2909 1392 2779 \nQ 1172 2650 1078 2428 \nQ 984 2206 984 1816 \nL 984 0 \nL 422 0 \nz\n\" transform=\"scale(0.015625)\"/>\n       </defs>\n       <use xlink:href=\"#ArialMT-4d\"/>\n       <use xlink:href=\"#ArialMT-6f\" x=\"83.300781\"/>\n       <use xlink:href=\"#ArialMT-6e\" x=\"138.916016\"/>\n       <use xlink:href=\"#ArialMT-74\" x=\"194.53125\"/>\n       <use xlink:href=\"#ArialMT-68\" x=\"222.314453\"/>\n      </g>\n     </g>\n    </g>\n   </g>\n   <g id=\"matplotlib.axis_2\">\n    <g id=\"ytick_1\">\n     <g id=\"text_2\">\n      <!-- 1 -->\n      <g style=\"fill: #262626\" transform=\"translate(55.716625 92.122062) scale(0.104 -0.104)\">\n       <defs>\n        <path id=\"ArialMT-31\" d=\"M 2384 0 \nL 1822 0 \nL 1822 3584 \nQ 1619 3391 1289 3197 \nQ 959 3003 697 2906 \nL 697 3450 \nQ 1169 3672 1522 3987 \nQ 1875 4303 2022 4600 \nL 2384 4600 \nL 2384 0 \nz\n\" transform=\"scale(0.015625)\"/>\n       </defs>\n       <use xlink:href=\"#ArialMT-31\"/>\n      </g>\n     </g>\n    </g>\n    <g id=\"ytick_2\">\n     <g id=\"text_3\">\n      <!-- 36 -->\n      <g style=\"fill: #262626\" transform=\"translate(49.93325 232.122062) scale(0.104 -0.104)\">\n       <defs>\n        <path id=\"ArialMT-33\" d=\"M 269 1209 \nL 831 1284 \nQ 928 806 1161 595 \nQ 1394 384 1728 384 \nQ 2125 384 2398 659 \nQ 2672 934 2672 1341 \nQ 2672 1728 2419 1979 \nQ 2166 2231 1775 2231 \nQ 1616 2231 1378 2169 \nL 1441 2663 \nQ 1497 2656 1531 2656 \nQ 1891 2656 2178 2843 \nQ 2466 3031 2466 3422 \nQ 2466 3731 2256 3934 \nQ 2047 4138 1716 4138 \nQ 1388 4138 1169 3931 \nQ 950 3725 888 3313 \nL 325 3413 \nQ 428 3978 793 4289 \nQ 1159 4600 1703 4600 \nQ 2078 4600 2393 4439 \nQ 2709 4278 2876 4000 \nQ 3044 3722 3044 3409 \nQ 3044 3113 2884 2869 \nQ 2725 2625 2413 2481 \nQ 2819 2388 3044 2092 \nQ 3269 1797 3269 1353 \nQ 3269 753 2831 336 \nQ 2394 -81 1725 -81 \nQ 1122 -81 723 278 \nQ 325 638 269 1209 \nz\n\" transform=\"scale(0.015625)\"/>\n        <path id=\"ArialMT-36\" d=\"M 3184 3459 \nL 2625 3416 \nQ 2550 3747 2413 3897 \nQ 2184 4138 1850 4138 \nQ 1581 4138 1378 3988 \nQ 1113 3794 959 3422 \nQ 806 3050 800 2363 \nQ 1003 2672 1297 2822 \nQ 1591 2972 1913 2972 \nQ 2475 2972 2870 2558 \nQ 3266 2144 3266 1488 \nQ 3266 1056 3080 686 \nQ 2894 316 2569 119 \nQ 2244 -78 1831 -78 \nQ 1128 -78 684 439 \nQ 241 956 241 2144 \nQ 241 3472 731 4075 \nQ 1159 4600 1884 4600 \nQ 2425 4600 2770 4297 \nQ 3116 3994 3184 3459 \nz\nM 888 1484 \nQ 888 1194 1011 928 \nQ 1134 663 1356 523 \nQ 1578 384 1822 384 \nQ 2178 384 2434 671 \nQ 2691 959 2691 1453 \nQ 2691 1928 2437 2201 \nQ 2184 2475 1800 2475 \nQ 1419 2475 1153 2201 \nQ 888 1928 888 1484 \nz\n\" transform=\"scale(0.015625)\"/>\n       </defs>\n       <use xlink:href=\"#ArialMT-33\"/>\n       <use xlink:href=\"#ArialMT-36\" x=\"55.615234\"/>\n      </g>\n     </g>\n    </g>\n   </g>\n  </g>\n </g>\n <defs>\n  <clipPath id=\"p7551e60f85\">\n   <rect x=\"72\" y=\"86.4\" width=\"576\" height=\"144\"/>\n  </clipPath>\n </defs>\n</svg>\n"
+        }
+    },
+    "alerts": [
+        "[UNIFORM] alert on column Month",
+        "[UNIQUE] alert on column Month"
+    ],
+    "package": {
+        "ydata_profiling_version": "v4.0.0",
+        "ydata_profiling_config": "{\"title\": \"Pandas Profiling Report\", \"dataset\": {\"description\": \"\", \"creator\": \"\", \"author\": \"\", \"copyright_holder\": \"\", \"copyright_year\": \"\", \"url\": \"\"}, \"variables\": {\"descriptions\": {}}, \"infer_dtypes\": true, \"show_variable_description\": true, \"pool_size\": 0, \"progress_bar\": true, \"vars\": {\"num\": {\"quantiles\": [0.05, 0.25, 0.5, 0.75, 0.95], \"skewness_threshold\": 20, \"low_categorical_threshold\": 5, \"chi_squared_threshold\": 0.999}, \"cat\": {\"length\": true, \"characters\": true, \"words\": true, \"cardinality_threshold\": 50, \"imbalance_threshold\": 0.5, \"n_obs\": 5, \"chi_squared_threshold\": 0.999, \"coerce_str_to_date\": false, \"redact\": false, \"histogram_largest\": 50, \"stop_words\": []}, \"image\": {\"active\": false, \"exif\": true, \"hash\": true}, \"bool\": {\"n_obs\": 3, \"imbalance_threshold\": 0.5, \"mappings\": {\"t\": true, \"f\": false, \"yes\": true, \"no\": false, \"y\": true, \"n\": false, \"true\": true, \"false\": false}}, \"path\": {\"active\": false}, \"file\": {\"active\": false}, \"url\": {\"active\": false}, \"timeseries\": {\"active\": false, \"sortby\": null, \"autocorrelation\": 0.7, \"lags\": [1, 7, 12, 24, 30], \"significance\": 0.05, \"pacf_acf_lag\": 100}}, \"sort\": null, \"missing_diagrams\": {\"bar\": true, \"matrix\": true, \"heatmap\": true}, \"correlation_table\": true, \"correlations\": {\"auto\": {\"key\": \"auto\", \"calculate\": true, \"warn_high_correlations\": 10, \"threshold\": 0.5, \"n_bins\": 10}, \"spearman\": {\"key\": \"spearman\", \"calculate\": false, \"warn_high_correlations\": 10, \"threshold\": 0.5, \"n_bins\": 10}, \"pearson\": {\"key\": \"pearson\", \"calculate\": false, \"warn_high_correlations\": 10, \"threshold\": 0.5, \"n_bins\": 10}, \"phi_k\": {\"key\": \"phi_k\", \"calculate\": false, \"warn_high_correlations\": 10, \"threshold\": 0.5, \"n_bins\": 10}, \"cramers\": {\"key\": \"cramers\", \"calculate\": false, \"warn_high_correlations\": 10, \"threshold\": 0.5, \"n_bins\": 10}, \"kendall\": {\"key\": \"kendall\", \"calculate\": false, \"warn_high_correlations\": 10, \"threshold\": 0.5, \"n_bins\": 10}}, \"interactions\": {\"continuous\": true, \"targets\": []}, \"categorical_maximum_correlation_distinct\": 100, \"memory_deep\": false, \"plot\": {\"missing\": {\"force_labels\": true, \"cmap\": \"RdBu\"}, \"image_format\": \"svg\", \"correlation\": {\"cmap\": \"RdBu\", \"bad\": \"#000000\"}, \"dpi\": 800, \"histogram\": {\"bins\": 50, \"max_bins\": 250, \"x_axis_labels\": true}, \"scatter_threshold\": 1000, \"cat_freq\": {\"show\": true, \"type\": \"bar\", \"max_unique\": 10, \"colors\": null}}, \"duplicates\": {\"head\": 10, \"key\": \"# duplicates\"}, \"samples\": {\"head\": 10, \"tail\": 10, \"random\": 0}, \"reject_variables\": true, \"n_obs_unique\": 10, \"n_freq_table_max\": 10, \"n_extreme_obs\": 10, \"report\": {\"precision\": 8}, \"html\": {\"style\": {\"primary_colors\": [\"#377eb8\", \"#e41a1c\", \"#4daf4a\"], \"logo\": \"\", \"theme\": null}, \"navbar_show\": true, \"minify_html\": true, \"use_local_assets\": true, \"inline\": true, \"assets_prefix\": null, \"assets_path\": null, \"full_width\": false}, \"notebook\": {\"iframe\": {\"height\": \"800px\", \"width\": \"100%\", \"attribute\": \"srcdoc\"}}}"
+    },
+    "sample": [
+        {
+            "id": "head",
+            "data": [
+                {
+                    "Month": "1-01"
+                },
+                {
+                    "Month": "1-02"
+                },
+                {
+                    "Month": "1-03"
+                },
+                {
+                    "Month": "1-04"
+                },
+                {
+                    "Month": "1-05"
+                },
+                {
+                    "Month": "1-06"
+                },
+                {
+                    "Month": "1-07"
+                },
+                {
+                    "Month": "1-08"
+                },
+                {
+                    "Month": "1-09"
+                },
+                {
+                    "Month": "1-10"
+                }
+            ],
+            "name": "First rows",
+            "caption": "None"
+        },
+        {
+            "id": "tail",
+            "data": [
+                {
+                    "Month": "3-03"
+                },
+                {
+                    "Month": "3-04"
+                },
+                {
+                    "Month": "3-05"
+                },
+                {
+                    "Month": "3-06"
+                },
+                {
+                    "Month": "3-07"
+                },
+                {
+                    "Month": "3-08"
+                },
+                {
+                    "Month": "3-09"
+                },
+                {
+                    "Month": "3-10"
+                },
+                {
+                    "Month": "3-11"
+                },
+                {
+                    "Month": "3-12"
+                }
+            ],
+            "name": "Last rows",
+            "caption": "None"
+        }
+    ],
+    "duplicates": []
+}

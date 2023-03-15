@@ -1,0 +1,66 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Dashboard {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+
+<div class="content">
+<!-- upload block -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card card-chart">
+                <div class="card-header">
+                    <h5 class="card-category">Phese One</h5>
+                    <h3 class="card-title"><i class="tim-icons icon-cloud-upload-94"></i>Upload dataset</h3>
+                </div>
+                
+                <div class="col-lg ml-auto mr-auto">
+                    <div class="row">
+                        <div class="col-md-7">
+                            <p>here I explain what you can do. I also describe the example dataset and link to their websites:</br>
+                                <a href="https://archive.ics.uci.edu/ml/datasets/iris"> About the Iris Dataset</a></br>
+                                <a href="https://www.kaggle.com/datasets/nickhould/craft-cans"> About the Beer Dataset</a>
+                                
+                                <!-- <form method=get action="{{ url_for('upload_sample', name='iris') }}">
+                                    <input class="btn btn-fill btn-primary font-icon-detail-small" type=submit>
+                                </form>
+                                <form method=get action="{{ url_for('upload_sample', name='beer') }}">
+                                    <input class="btn btn-fill btn-primary font-icon-detail-small" type=submit>
+                                </form> -->
+
+                            </p>
+                            <div class="col-xs-12 col-xs-offset-0 col-sm-offset-3 col-sm-6">
+                                <a class="btn btn-primary btn-lg btn-block btn-group" href="{{ url_for('upload')}}" role="button">Get Started!</a>
+                            </div>
+                        </div>
+                        
+                    </div></br>
+                </div>
+                
+                <!-- <canvas id="upload_dataset"></canvas> -->
+            </div>
+        </div>
+    </div>
+
+</div>
+        
+        {% endblock content %}
+
+
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+<script>
+    $(document).ready(function () {
+        // Javascript method's body can be found in assets/js/demos.js
+        demo.initDashboardPageCharts();
+
+    });
+</script>
+
+{% endblock javascripts %}
