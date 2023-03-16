@@ -22,7 +22,7 @@ from datetime import datetime
 from werkzeug.utils import secure_filename
 import apps.scripts.kb_test as kb
 import apps.scripts.allThePlots as myPlots
-import apps.scripts.quality_dimensions as quality_dims
+import apps.scripts.quality_dimensions_and_ranking_calc as dims_and_rank
 import apps.scripts.improve_quality_laura as improve
 import apps.scripts.data_imputation_tecniques as imputes
 from apps.scripts.preprocessing import preprocess_input_df
@@ -88,7 +88,6 @@ def save_data_temp(df):
     # save the cleaned dataset as csv
     df.to_csv(os.path.join(HERE, DF_NAME_TEMP))
 
-
 def get_data(name, dirname):
     upload_path = os.path.join(tempfile.gettempdir(), dirname)
     data_path = os.path.join(upload_path, name + '.csv')
@@ -105,11 +104,13 @@ def get_data(name, dirname):
 
     return df, columns
 
+ # Get the last DataFrame
 def last_dataframe():
     global dataframes
     df = dataframes[-1]
+    return df
     
-    # Get the last DataFrame in the session list
+   
     # df_list = session.get('df_list', [])
     # # last_df = df_list[-1] if len(df_list) > 0 else None
 
@@ -119,42 +120,12 @@ def last_dataframe():
     # df = pd.DataFrame(last_element)
     
     # Render a template that displays the DataFrame
-    return df
+   
 
-def rank_kb(df, algorithm):
-    kb_read_example = pd.read_csv("apps/scripts/kb-toy-example.csv", sep=",")
-    ranking_kb = kb.predict_ranking(kb_read_example, df, algorithm)
-    ranking_kb = str(ranking_kb)
-    ranking_kb = ranking_kb.replace("[", "")
-    ranking_kb = ranking_kb.replace("]", "")
-    ranking_kb = ranking_kb.replace("'", "")
-    ranking_kb = ranking_kb.split()
-    return ranking_kb
-
-def rank_dim(accuracy, uniqueness, completeness):
-    ordered_values = sorted([accuracy, uniqueness, completeness])
-    ranking_dim = []
-    for i in range(2):
-        if ordered_values[i] == accuracy:
-            ranking_dim.append('ACCURACY')
-        if ordered_values[i] == completeness:
-            ranking_dim.append('COMPLETENESS')
-        if ordered_values[i] == uniqueness:
-            ranking_dim.append('UNIQUENESS')
-    return str(ranking_dim)
-
-def average_ranking(ranking_kb, ranking_dim):
-    # Get the unique values in both lists using set() function
-    unique_values = set(ranking_kb) | set(ranking_dim)
-
-    # Create a new list with the average order
-    new_list = [value for value in ranking_kb if value in unique_values]
-    new_list += [value for value in ranking_dim if value not in new_list]
-
-    # Print the new list with the average order
-    return new_list
-
-
+# Function to append dataframe to the global list
+def append_dataframe(df):
+    global dataframes
+    dataframes.append(df)
 
 
 #delete json report once the upload or new upload is pressed
@@ -223,10 +194,7 @@ def upload_sample(name):
                             dirname=os.path.basename(dirpath),
                             name=name))
 
-# Function to append dataframe to the global list
-def append_dataframe(df):
-    global dataframes
-    dataframes.append(df)
+
 
 
 @app.route('/audit/<name>/<dirname>/', methods=['GET', 'POST'])
@@ -295,51 +263,7 @@ def audit_file(name, dirname):
                                 )
     
 
-# @app.route("/update_order", methods=["POST"])
-# def update_order():
-#     order1 = request.form.getlist("order1[]")
-#     order2 = request.form.getlist("order2[]")
-    
-#     # Update order in the backend as desired
-    
-#     return jsonify({"success": True})
 
-# @app.route('/update_data', methods=['POST'])
-# def update_data():
-#     if request.form.get('Submit Outliers'):
-#         min_max_values = request.form.getlist('values')  # get the list of 'min' values from the form data
-    
-#     min_values = [min_max_values[0] for min_max_values in min_max_values]
-#     max_values = [min_max_values[1] for min_max_values in min_max_values]
-#     # update the data in your application's database or data structure using the min_values and max_values
-#     return min_values, max_values
-
- # if str(request.form.get("submit")) == "Submit Outliers":
-    #         print("success")
-    #         j=0
-    #         for col in typeNUMlist:
-    #             if request.form.get('min_' + col):
-    #                 min_values[j] = request.form.get('min_' + col)
-    #             else: min_values[j] = minValueList[j]
-    #             if request.form.get('max_' + col):
-    #                 max_values[j] = request.form.get('max_' + col)
-    #             else: max_values[j] = maxValueList[j]
-    #             j=+1
-    
-# @app.route('/submit-outliers', methods=['POST'])
-# def submit_outliers():
-#   min_values = {}
-#   max_values = {}
-#   for key, value in request.form.items():
-#     if key.startswith('min_'):
-#       min_values[key[4:]] = value
-#     elif key.startswith('max_'):
-#       max_values[key[4:]] = value
-#   # Process the form data here
-#   # Return a response
-#   session['min_values'] = min_values
-#   session['max_values'] = max_values
-#   return jsonify({'status': 'success'})
 
 @app.route('/submit_outliers', methods=['POST'])
 def submit_outliers():
@@ -366,7 +290,7 @@ def get_techniques():
     return [
         {"id": "remove_duplicates", "name": "",  "text": "Remove duplicates", "dimension":"UNIQUENESS" },
         {"id": "impute_standard", "name": "Standard",  "text": "Impute missing values (0/Missing)", "dimension":"COMPLETENESS"},
-        {"id": "drop_cols", "name": "", "text": "Drop columns with missing values", "dimension":"COMPLETENESS"},
+        
         {"id": "drop_rows", "name": "", "text": "Drop rows with missing values", "dimension":"COMPLETENESS"},
         {"id": "impute_mean", "name": "Mean", "text": "Impute missing values (mean/mode)", "dimension":"COMPLETENESS"},
         {"id": "impute_std", "name": "Std", "text": "Impute missing values (standard deviation/mode)", "dimension":"COMPLETENESS"},
@@ -379,7 +303,7 @@ def get_techniques():
         
         {"id": "outlier_correction", "name": "", "text": "Outlier correction", "dimension":"ACCURACY"},
         {"id": "oc_impute_standard", "name": "Standard", "text": "Outlier correction with imputation ((0/Missing)", "dimension":"ACCURACY"},
-        {"id": "oc_drop_cols", "name": "", "text": "Outlier correction with drop columns", "dimension":"ACCURACY"},
+        
         {"id": "oc_drop_rows", "name": "", "text": "Outlier correction with drop rows", "dimension":"ACCURACY"},
         {"id": "oc_impute_mean", "name": "Mean", "text": "Outlier correction with imputation (mean/mode)", "dimension":"ACCURACY"},
         {"id": "oc_impute_std", "name": "Std", "text": "Outlier correction with imputation (standard deviation/mode)", "dimension":"ACCURACY"},
@@ -389,8 +313,8 @@ def get_techniques():
         {"id": "oc_impute_mice", "name": "Mice", "text": "Outlier correction with imputation (Mice)", "dimension":"ACCURACY"}
     ]
 
-
-
+# {"id": "oc_drop_cols", "name": "", "text": "Outlier correction with drop columns", "dimension":"ACCURACY"},
+# {"id": "drop_cols", "name": "", "text": "Drop columns with missing values", "dimension":"COMPLETENESS"},
 
 
 @app.route("/apply", methods=["POST"])
@@ -405,12 +329,6 @@ def save_and_apply():
     min_values = session.get('min_values', [])
     max_values = session.get('max_values', [])
     outlier_range = [list(x) for x in zip(min_values, max_values)]
-    
-    # algorithm = session.get('algorithm', [])
-    # support = session.get('support', [])
-    # confidence = session.get('confidence', [])
-    # name = session.get('name', [])
-    # dirname = session.get('dirname', [])
 
     techniques=get_techniques()
 
@@ -421,12 +339,6 @@ def save_and_apply():
         elif tech == "impute_standard":
             impute = imputes.impute_standard()
             df = impute.fit(df)
-
-        # elif tech == "drop_cols":
-        #     impute = imputes.drop()
-        #     df = impute.fit_cols(df)
-        #     # store selected_attributes in session
-        #     session['selected_attributes'] = list(df.columns)
 
         elif tech == "drop_rows":
             impute = imputes.drop()
@@ -472,13 +384,6 @@ def save_and_apply():
             impute = imputes.impute_standard()
             df = impute.fit(df)
 
-        elif tech == "oc_drop_cols":
-            df = improve.outlier_correction(df, outlier_range)
-            impute = imputes.drop()
-            df = impute.fit_cols(df)
-            global column_list
-            column_list = list(df.columns)
-
         elif tech == "oc_drop_rows":
             df = improve.outlier_correction(df, outlier_range)
             impute = imputes.drop()
@@ -514,15 +419,7 @@ def save_and_apply():
             impute = imputes.impute_mice()
             df = impute.fit(df)
 
-            
-    global dataframes
-    dataframes.append(df)
-    # Append the modified DataFrame to the session list
-    # df_copy = df.copy()
-    # print(len(df_copy))
-    # session['df_list'] = []
-    # session['df_list'].append(df_copy.to_dict(orient='records'))
-
+    append_dataframe(df)
     save_data(df) #saves the dataframe in file data.csv
   
 
@@ -584,6 +481,7 @@ def data_profiling(name, dirname, algorithm, support, confidence):
     distrCAT_html_list = myPlots.distributionCategorical(df,typeCATlist)
     #treeMap_html_list= myPlots.treePlot(df, typeCATlist)
     myPlots.missing_data(df) #missigno plots
+    myPlots.table_df(df)
 
     min_values = []
     max_values = []
@@ -595,7 +493,7 @@ def data_profiling(name, dirname, algorithm, support, confidence):
         
     if 'max_values' not in session:
         for i in range(len(typeNUMlist)):
-            max_values.append(minValueList[i])
+            max_values.append(maxValueList[i])
         session['max_values'] = max_values
         
     min_values = session.get('min_values', [])
@@ -604,19 +502,16 @@ def data_profiling(name, dirname, algorithm, support, confidence):
     print(max_values)
     
     #calculate dimensions
-    accuracy=quality_dims.accuracy_value(df, profile, columns, typeNUMlist, min_values, max_values)
-    uniqueness=quality_dims.uniqueness_value(profile)
-    completeness=quality_dims.completeness_value(profile, columns)
+    accuracy=dims_and_rank.accuracy_value(df, profile, columns, typeNUMlist, min_values, max_values)
+    uniqueness=dims_and_rank.uniqueness_value(profile)
+    completeness=dims_and_rank.completeness_value(profile, columns)
     
     #ranking of the dimensions
-    ranking_dim = rank_dim(accuracy, uniqueness, completeness)
+    ranking_dim = dims_and_rank.rank_dim(accuracy, uniqueness, completeness)
     #ranking based on the characteristics of the knowledge base
-    ranking_kb = rank_kb(df, algorithm)
+    ranking_kb = dims_and_rank.rank_kb(df, algorithm)
 
-    average_rank = average_ranking(ranking_kb, ranking_dim)
-
-    df_updates = []
-    df_updates.append(df)
+    average_rank = dims_and_rank.average_ranking(ranking_kb, ranking_dim)
 
     techniques=get_techniques()    
 
@@ -641,16 +536,13 @@ def data_profiling(name, dirname, algorithm, support, confidence):
                         confidence=confidence))
     
     else:
-        
-        
-        
+
         return render_template("home/profiling.html",
                                 name=name,
                                 dirname=dirname,
                                 columns=columns,
                                 algorithm=algorithm,
                                 average_rank=average_rank,
-                                sample=df.head(20),
                                 techniques=techniques,
 
                                 support=support,
@@ -674,10 +566,11 @@ def data_profiling(name, dirname, algorithm, support, confidence):
 
 @app.route('/apply_modifications/<name>/<dirname>/<algorithm>/<support>/<confidence>/', methods=['GET', 'POST'])
 def apply_modifications(name,dirname,algorithm,support,confidence):
-        global dataframes
+       
         # start_report_generation()
         df = last_dataframe()
         profile = ProfileReport(df)
+        global dataframes
         i=len(dataframes)
         profile.to_file(f'apps/report/profile_{i}.json')
 
@@ -690,14 +583,6 @@ def apply_modifications(name,dirname,algorithm,support,confidence):
                         confidence=confidence
                             )
                         )
-
-
-
-#nav(df,variables=None,Interactions=True, Correlations=None,  Missing_values=None, Sample=None)
-#missing values, correlazione tra colonne, overview iniziale, no interazioni
-#fase di mezzanea calcola outliers, ispezione functional dependencies e conoscenza aggiuntiva per ouliers (range)
-
-
 
 
 

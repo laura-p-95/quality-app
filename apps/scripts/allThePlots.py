@@ -73,7 +73,7 @@ def distributionPlot(df,typeNUMlist):
         fig = ff.create_distplot([data], [var])
 
         # Update the layout of the figure
-        fig.update_layout(xaxis_title='Value', yaxis_title='Density', width=500, autosize=True,)
+        fig.update_layout(xaxis_title='Value', yaxis_title='Density', width=600, autosize=True,)
 
         # Add the figure to the list
         fig_list.append(fig)
@@ -83,7 +83,7 @@ def distributionPlot(df,typeNUMlist):
         fig.update_layout(showlegend=False, font = dict(color = '#ced4da'), paper_bgcolor="#27293d", margin=dict(l=5, r=10, b=5, t=30))
         fig_json = fig.to_plotly_json()
         fig_obj = go.Figure(fig_json['data'], fig_json['layout'])
-        fig_obj.update_layout(height=300, width=500)
+        fig_obj.update_layout(height=300, width=600)
         fig_obj.update_traces(marker=dict(color='#1f77b4'))
         fig_obj.update_yaxes(title_text='Density')
         fig_obj.update_xaxes(title_text='Value')
@@ -110,7 +110,7 @@ def distributionCategorical(df,typeCATlist):
             vc = df[var].value_counts()
             vc_df = pd.DataFrame({'var': vc.index, 'count': vc.values})
             fig = px.bar(vc_df, x='var', y='count')
-            fig.update_layout(xaxis_title='Value', yaxis_title='Count', width=500, autosize=True, font = dict(color = '#ced4da'), paper_bgcolor="#27293d", margin=dict(l=5, r=10, b=5, t=30))
+            fig.update_layout(xaxis_title='Value', yaxis_title='Count', width=600, autosize=True, font = dict(color = '#ced4da'), paper_bgcolor="#27293d", margin=dict(l=5, r=10, b=5, t=30))
             
             filename = f"apps/templates/home/Plots/barCATPlot_{num}.html"
             name = f"home/Plots/barCATPlot_{num}.html"
@@ -194,3 +194,24 @@ def treePlot(df, typeCATlist):
             num=num+1
     
     return html_files
+
+
+def table_df(df):
+    
+    num_cols = df.shape[1]
+
+    fig = go.Figure(data=[go.Table(
+        header=dict(values=list(df.columns),
+                    fill_color='#db2dc0',
+                    align='left',
+                    font=dict(color='white', size=12)), 
+        cells=dict(values=[df.iloc[:, i] for i in range(num_cols)],
+                fill_color='lavender',
+                align='left',
+                font = dict(color = '#555')))
+    ])
+    fig.update_layout(autosize=True, height=700,
+                      paper_bgcolor="#27293d", margin=dict(l=5, r=10, b=5, t=30)
+                    
+                      )
+    pl.offline.plot(fig, filename = 'apps/templates/home/Plots/table_df.html', auto_open=False)
