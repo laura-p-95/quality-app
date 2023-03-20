@@ -24,7 +24,7 @@ class no_impute:
     def fit(self, df):
         return df
 
-class impute_standard:
+class impute_standard():
     def __init__(self):
         self.name = 'Standard'
 
@@ -36,7 +36,7 @@ class impute_standard:
                 df[col] = df[col].fillna("Missing")
         return df
 
-class drop: #using the other
+class drop(): #using the other
     def __init__(self):
         self.name = 'Drop'
 
@@ -48,7 +48,7 @@ class drop: #using the other
         df = df.dropna(axis=0, how='any')
         return df
 
-class impute_mean:
+class impute_mean():
     def __init__(self):
         self.name = 'Mean'
 
@@ -66,7 +66,7 @@ class impute_mean:
                 df[col] = df[col].fillna(df[col].mode()[0])
         return df
 
-class impute_std:
+class impute_std():
     def __init__(self):
         self.name = 'Std'
 
@@ -84,7 +84,7 @@ class impute_std:
                 df[col] = df[col].fillna(df[col].mode()[0])
         return df
 
-class impute_mode:
+class impute_mode():
     def __init__(self):
         self.name = 'Mode'
 
@@ -140,7 +140,7 @@ class impute_knn():
 
         return df_m
 
-class impute_mice:
+class impute_mice():
     def __init__(self):
         self.name = 'Mice'
 

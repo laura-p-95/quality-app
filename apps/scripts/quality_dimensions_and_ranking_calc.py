@@ -49,22 +49,65 @@ def rank_kb(df, algorithm):
 def rank_dim(accuracy, uniqueness, completeness):
     ordered_values = sorted([accuracy, uniqueness, completeness])
     ranking_dim = []
-    for i in range(2):
+    for i in range(3):
         if ordered_values[i] == accuracy:
             ranking_dim.append('ACCURACY')
         if ordered_values[i] == completeness:
             ranking_dim.append('COMPLETENESS')
         if ordered_values[i] == uniqueness:
             ranking_dim.append('UNIQUENESS')
-    return str(ranking_dim)
+    return ranking_dim
 
 def average_ranking(ranking_kb, ranking_dim):
     # Get the unique values in both lists using set() function
-    unique_values = set(ranking_kb) | set(ranking_dim)
+    print("kb  ")
+    print(ranking_kb)
+    print("dim  ")
+    print(ranking_dim)
+    accuracy=0
+    completeness=0 
+    uniqueness = 0
+    for i in range(3):
+        if ranking_kb[i] == 'ACCURACY':
+            if i==0: accuracy = accuracy + 0.5 * 60
+            if i==1: accuracy = accuracy +  0.5 * 30
+            if i==2: accuracy = accuracy +  0.5 * 10
+            
+        if ranking_kb[i] == 'COMPLETENESS':
+            if i==0: completeness = completeness +  0.5 * 60
+            if i==1: completeness = completeness +  0.5 * 30
+            if i==2: completeness = completeness +  0.5 * 10
+        if ranking_kb[i] == 'UNIQUENESS':
+            if i==0: uniqueness = uniqueness +  0.5 * 60
+            if i==1: uniqueness = uniqueness +  0.5 * 30
+            if i==2: uniqueness = uniqueness +  0.5 * 10
+        
 
-    # Create a new list with the average order
-    new_list = [value for value in ranking_kb if value in unique_values]
-    new_list += [value for value in ranking_dim if value not in new_list]
+    for i in range(3):
+        if ranking_dim[i] == 'ACCURACY':
+            if i==0: accuracy = accuracy +  0.5 * 60
+            if i==1: accuracy = accuracy +  0.5 * 30
+            if i==2: accuracy = accuracy +  0.5 * 10
+                   
+        if ranking_dim[i] == 'COMPLETENESS':
+            if i==0: completeness = completeness +  0.5 * 60
+            if i==1: completeness = completeness +  0.5 * 30
+            if i==2: completeness = completeness +  0.5 * 10
+        
+        if ranking_dim[i] == 'UNIQUENESS':
+            if i==0: uniqueness = uniqueness +  0.5 * 60
+            if i==1: uniqueness = uniqueness +  0.5 * 30
+            if i==2: uniqueness = uniqueness +  0.5 * 10
+    
 
+    sort = sorted([accuracy, uniqueness, completeness])
+    ranking=[]
+    for i in range(3):
+        if sort[i] == accuracy:
+            ranking.append('ACCURACY')
+        if sort[i] == completeness:
+            ranking.append('COMPLETENESS')
+        if sort[i] == uniqueness:
+            ranking.append('UNIQUENESS')
     # Print the new list with the average order
-    return new_list
+    return ranking

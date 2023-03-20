@@ -9,15 +9,10 @@ from flask   import Flask, session, render_template, request, abort, redirect, u
 from jinja2  import TemplateNotFound
 import os
 import tempfile
-# import framework_webapp.scripts.improve_quality as iq
-# import framework_webapp.scripts.associationRules as assr
 import pandas as pd
 
 from ydata_profiling import ProfileReport
 import numpy as np
-
-
-# import framework_webapp.scripts.knowledge as kb
 from datetime import datetime
 from werkzeug.utils import secure_filename
 import apps.scripts.kb_test as kb
@@ -70,6 +65,8 @@ Session(app)
 
 dataframes = [] #global variable
 column_list = [0]
+
+
 
 def get_columns(columns):
     if isinstance(columns, str):        
@@ -126,6 +123,7 @@ def last_dataframe():
 def append_dataframe(df):
     global dataframes
     dataframes.append(df)
+    
 
 
 #delete json report once the upload or new upload is pressed
@@ -133,7 +131,7 @@ def append_dataframe(df):
 def delete_file():
        
     # Create a relative file path using os.path.join()
-    file_path = os.path.join(HERE, 'report/profile.json')
+    file_path = os.path.join(HERE, 'report\profile.json')
 
     # Delete the file
     os.remove(file_path)
@@ -154,6 +152,7 @@ def upload():
 
 @app.route('/audit', methods=['POST'])
 def upload_file():
+    session.clear()
     referer = request.headers.get('referer')
     redirect_url = referer or url_for('home/index.html')
 
@@ -212,8 +211,12 @@ def audit_file(name, dirname):
         if col == request.form.get(col):
             selected_attributes.append(col)
 
-     # store selected_attributes in session
+    #  store selected_attributes in session
     session['selected_attributes'] = selected_attributes
+
+    # global column_list
+    # column_list = get_columns(selected_attributes)
+    
     
 
     if request.form.get('Support'):
@@ -240,9 +243,11 @@ def audit_file(name, dirname):
     if str(request.form.get("submit")) == "Profiling":
         profile = ProfileReport(df)
         # i=len(session['df_list'])
+        # global dataframes
         i=len(dataframes)
         profile.to_file(f'apps/report/profile_{i}.json')
-        # profile.to_file('apps/report/profile.json')
+        # profile.to_file('apps/report\profile.json')
+        
 
         return redirect(url_for("data_profiling",
                         name=name,
@@ -323,105 +328,150 @@ def save_and_apply():
     # do something with the sorted list
     print(sorted_list)
 
-    cols = session.get('selected_attributes', [])
+    # global column_list
+    # cols= column_list
+    # cols = session.get('selected_attributes', [])
     df = last_dataframe()
     
     min_values = session.get('min_values', [])
     max_values = session.get('max_values', [])
     outlier_range = [list(x) for x in zip(min_values, max_values)]
-
-    techniques=get_techniques()
+    print(outlier_range)
 
     for tech in sorted_list:
         if tech == "remove_duplicates":
             df = improve.remove_duplicates(df)
+            print("Success")
+            
 
         elif tech == "impute_standard":
-            impute = imputes.impute_standard()
-            df = impute.fit(df)
+            df = improve.imputing_missing_values(df)
+            print("Success")
+            
 
         elif tech == "drop_rows":
             impute = imputes.drop()
             df = impute.fit_rows(df)
+            print("Success")
+            
 
         elif tech == "impute_mean":
             impute = imputes.impute_mean()
             df = impute.fit_mode(df)
+            print("Success")
+            
 
         elif tech == "impute_std":
             impute = imputes.impute_std()
             df = impute.fit_mode(df)
+            print("Success")
+            
 
         elif tech == "impute_mode":
             impute = imputes.impute_mode()
             df = impute.fit(df)
+            print("Success")
+            
 
         elif tech == "impute_median":
             impute = imputes.impute_median()
             df = impute.fit_mode(df)
+            print("Success")
+            
 
         elif tech == "impute_knn":
             impute = imputes.impute_knn()
             df = impute.fit(df)
+            print("Success")
+            
 
         elif tech == "impute_knn_cat":
             impute = imputes.impute_knn()
             df = impute.fit_cat(df)
+            print("Success")
+            
 
         elif tech == "impute_mice":
             impute = imputes.impute_mice()
             df = impute.fit(df)
+            print("Success")
+            
 
         elif tech == "impute_mice_cat":
             impute = imputes.impute_mice()
             df = impute.fit_cat(df)
+            print("Success")
+            
 
         elif tech == "outlier_correction":
             df = improve.outlier_correction(df, outlier_range)
+            print("Success")
+            
             
         elif tech == "oc_impute_standard":
             df = improve.outlier_correction(df, outlier_range)
             impute = imputes.impute_standard()
             df = impute.fit(df)
+            print("Success")
+            
 
         elif tech == "oc_drop_rows":
             df = improve.outlier_correction(df, outlier_range)
             impute = imputes.drop()
             df = impute.fit_rows(df)
+            print("Success")
+            
 
         elif tech == "oc_impute_mean":
             df = improve.outlier_correction(df, outlier_range)
             impute = imputes.impute_mean()
             df = impute.fit_mode(df)
+            print("Success")
+            
 
         elif tech == "oc_impute_std":
             df = improve.outlier_correction(df, outlier_range)
             impute = imputes.impute_std()
             df = impute.fit_mode(df)
+            print("Success")
+            
 
         elif tech == "oc_impute_mode":
             df = improve.outlier_correction(df, outlier_range)
             impute = imputes.impute_mode()
             df = impute.fit(df)
+            print("Success")
+            
 
         elif tech == "oc_impute_median":
             df = improve.outlier_correction(df, outlier_range)
             impute = imputes.impute_median()
             df = impute.fit_mode(df)
+            print("Success")
+            
 
         elif tech == "oc_impute_knn":
             df = improve.outlier_correction(df, outlier_range)
             impute = imputes.impute_knn()
             df = impute.fit(df)
+            print("Success")
+            
 
         elif tech == "oc_impute_mice":
             df = improve.outlier_correction(df, outlier_range)
             impute = imputes.impute_mice()
             df = impute.fit(df)
-
-    append_dataframe(df)
+            print("Success")
+    
+    global dataframes
+    dataframes.append(df)
     save_data(df) #saves the dataframe in file data.csv
-  
+    
+    return "Changes applied successfully."
+
+    
+    
+
 
 
 
@@ -430,6 +480,7 @@ def save_and_apply():
 def data_profiling(name, dirname, algorithm, support, confidence):
     # access selected_attributes from session
     col_list = session.get('selected_attributes', '0')
+    columns=col_list
     
     # access dataframe from global
     df = last_dataframe()
@@ -446,11 +497,18 @@ def data_profiling(name, dirname, algorithm, support, confidence):
     columns_names= list(df.columns)
 
     global dataframes
-    # Load the JSON file into a string variable
     i = len(dataframes)
-    with open(f'apps/report/profile_{i}.json', "r") as f:
-        json_str = f.read()
-
+    profile_path = (f'apps/report/profile_{i}.json')
+    if os.path.isfile(profile_path):
+        with open(f'apps/report/profile_{i}.json', "r") as f:
+            json_str = f.read()
+    else:
+        profile = ProfileReport(df)
+        profile.to_file(f'apps/report/profile_{i}.json')
+        with open(f'apps/report/profile_{i}.json', "r") as f:
+            json_str = f.read()
+    
+    
     # Parse the JSON string into a dictionary object
     profile = json.loads(json_str)
     typeList =[]
@@ -480,7 +538,7 @@ def data_profiling(name, dirname, algorithm, support, confidence):
     distr_html_list = myPlots.distributionPlot(df,typeNUMlist)  #distribution plots(distr_html_list takes the list of html addresses where the plots are saved)
     distrCAT_html_list = myPlots.distributionCategorical(df,typeCATlist)
     #treeMap_html_list= myPlots.treePlot(df, typeCATlist)
-    myPlots.missing_data(df) #missigno plots
+    myPlots.missing_data(df, profile) #missigno plots
     myPlots.table_df(df)
 
     min_values = []
@@ -508,6 +566,7 @@ def data_profiling(name, dirname, algorithm, support, confidence):
     
     #ranking of the dimensions
     ranking_dim = dims_and_rank.rank_dim(accuracy, uniqueness, completeness)
+   
     #ranking based on the characteristics of the knowledge base
     ranking_kb = dims_and_rank.rank_kb(df, algorithm)
 
@@ -517,16 +576,18 @@ def data_profiling(name, dirname, algorithm, support, confidence):
 
 
     if str(request.form.get("submit")) == "Upload new dataset":
+        session.clear()
         return redirect(url_for('upload'))
     
     if str(request.form.get("submit")) == "Modify choices":
-        
+        session.clear()
         return redirect(url_for('audit_file', dirname=os.path.basename(dirname), name=name))
     
     if str(request.form.get("submit")) == "Download your csv file":
         return send_from_directory(directory=HERE + "/datasets", path="data.csv")
     
     if str(request.form.get("submit")) == "Apply modifications":
+         
         return redirect(url_for('apply_modifications', 
                         name=name,
                         dirname=dirname,
@@ -564,15 +625,11 @@ def data_profiling(name, dirname, algorithm, support, confidence):
                                 )
 
 
+
+
 @app.route('/apply_modifications/<name>/<dirname>/<algorithm>/<support>/<confidence>/', methods=['GET', 'POST'])
 def apply_modifications(name,dirname,algorithm,support,confidence):
-       
-        # start_report_generation()
-        df = last_dataframe()
-        profile = ProfileReport(df)
-        global dataframes
-        i=len(dataframes)
-        profile.to_file(f'apps/report/profile_{i}.json')
+               
 
         return redirect(url_for("data_profiling",
                         name=name,
@@ -583,9 +640,6 @@ def apply_modifications(name,dirname,algorithm,support,confidence):
                         confidence=confidence
                             )
                         )
-
-
-
 
 
 

@@ -149,30 +149,43 @@ def heatmap(df):
     # fig = go.Figure(data=[trace], layout=layout)
     
 
-def missing_data(df):
+def missing_data(df, profile):
 
     # Generate missing data visualization using missingno
     fig_matrix = msno.matrix(df, color=(0.329, 0.059, 0.286),  fontsize=12)
     # fig_bar = msno.bar(df, color=(0.329, 0.059, 0.286),  fontsize=12)
-
-    img_url = []
-
-    # Generate the plot from the missingness matrix
-    # fig_b = fig_bar.get_figure()
-    # img_b = 'apps/static/assets/img/bars.png'
-    # fig_b.savefig(img_b, format='png')
-
     fig_m = fig_matrix.get_figure()
     img_m = 'apps/static/assets/img/matrix.png'
     fig_m.savefig(img_m, format='png')
+
+    # # Create a list of binary values for each column in the DataFrame
+    # binary_values = [[1 if pd.notnull(val) else 0 for val in df[col]] for col in df.columns]
+    # # # Create a Plotly bar chart with one inner list in each bar
+    # # fig_matrix = px.bar(df, x=list(df.columns), y=transposed_values, text=transposed_values, color_continuous_scale='bupu')
+    # column_names = list(df.columns)
+    # binary_values = [pd.notnull(df[col]).astype(int) for col in df.columns]
+    # fig_matrix = px.bar(df, x=column_names, y=binary_values, text=binary_values, color_continuous_scale='bupu')
+
+    # # fig_matrix.update_layout(font = dict(color = '#ced4da'), paper_bgcolor="#27293d", margin=dict(l=5, r=10, b=5, t=30))
+    # pl.offline.plot(fig_matrix, filename = 'apps/templates/home/Plots/matrix_missing_values.html', auto_open=True)
+
+    bars_data=[]
+    for var in profile['variables'].values():
+        n_tot= profile['table']['n']
+        n_missing = var['n_missing']
+        bars_data.append(n_tot - n_missing)
+
+    fig_bars = px.bar(bars_data, x=list(df.columns), y=bars_data, text_auto=True, color_continuous_scale='bupu')
+    fig_bars.update_layout(font = dict(color = '#ced4da'), paper_bgcolor="#27293d", margin=dict(l=5, r=10, b=5, t=30))
+    pl.offline.plot(fig_bars, filename = 'apps/templates/home/Plots/bars_missing_values.html', auto_open=False)
 
     #for the heatmap
     df = df.iloc[:, [i for i, n in enumerate(np.var(df.isnull(), axis='rows')) if n > 0]]
     corr_mat = df.isnull().corr()
     corr_mat = round(corr_mat,2)
-    fig_heat = px.imshow(corr_mat, x=corr_mat.index, y=corr_mat.columns, text_auto=True, aspect="auto", color_continuous_scale='bupu')
+    fig_heat = px.imshow(corr_mat, x=corr_mat.index, y=corr_mat.columns, aspect="auto", text_auto=True, color_continuous_scale='bupu')
     fig_heat.update_xaxes(side="top")
-    fig_heat.update_layout(font = dict(color = '#ced4da'), paper_bgcolor="#27293d", margin=dict(l=5, r=10, b=5, t=30))
+    fig_heat.update_layout(autosize=True, font = dict(color = '#ced4da'), paper_bgcolor="#27293d", margin=dict(l=5, r=10, b=5, t=30))
     pl.offline.plot(fig_heat, filename = 'apps/templates/home/Plots/heatmap_missing_values.html', auto_open=False)
 
 
@@ -215,3 +228,5 @@ def table_df(df):
                     
                       )
     pl.offline.plot(fig, filename = 'apps/templates/home/Plots/table_df.html', auto_open=False)
+
+

@@ -37,7 +37,7 @@
                         <div class="tab-content tab-space">
 
                             <div class="tab-pane active" id="count">
-
+                                {% include 'home/Plots/bars_missing_values.html' %}
 
                             </div>
 
@@ -46,6 +46,8 @@
                             <div class="tab-pane" id="heat">
                                 {% include 'home/Plots/heatmap_missing_values.html' %}
                             </div>
+
+
                             <div class="tab-pane" id="matrix">
                                 <img src="/static/assets/img/matrix.png" class="img-fluid center-block">
 

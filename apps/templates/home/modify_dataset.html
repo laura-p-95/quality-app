@@ -1,7 +1,9 @@
 {% block stylesheets %}
-<link rel="stylesheet" href="{{ config.ASSETS_ROOT }}/scss/jquery-ui.css">
+<link rel="stylesheet" href="{{ config.ASSETS_ROOT }}/css/jquery-ui.css">
 <style>
-  #sortable1 {
+  #sortable1,
+  #sortable2,
+  #sortable3 {
     list-style-type: none;
     margin: 0;
     padding: 5px;
@@ -15,7 +17,7 @@
   }
 
 
-  #sortable2 {
+  #sortableList {
     border: 1px solid #525f7f;
     background-color: #525f7f;
     width: 100%;
@@ -28,7 +30,9 @@
     border-radius: 8px;
   }
 
-  #sortable1 li {
+  #sortable1 li,
+  #sortable2 li,
+  #sortable3 li {
     margin: 3px 3px 3px 3px;
     padding: 1px;
     float: left;
@@ -43,7 +47,7 @@
   }
 
 
-  #sortable2 li {
+  #sortableList li {
     margin: 0 5px 5px 5px;
     padding: 5px;
     font-size: small;
@@ -59,7 +63,6 @@
     margin-right: auto;
 
   }
-  
 </style>
 
 
@@ -93,12 +96,12 @@
                       </a>
                     </li>&nbsp;&nbsp;
                     <li class="nav-item">
-                      <a class="nav-link active" data-toggle="tab" href="#{{average_rank[0]}}">
+                      <a class="nav-link" data-toggle="tab" href="#{{average_rank[1]}}">
                         {{average_rank[1]}}
                       </a>
                     </li>&nbsp;&nbsp;
                     <li class="nav-item">
-                      <a class="nav-link active" data-toggle="tab" href="#{{average_rank[0]}}">
+                      <a class="nav-link" data-toggle="tab" href="#{{average_rank[2]}}">
                         {{average_rank[2]}}
                       </a>
                     </li>
@@ -114,35 +117,47 @@
                     For example (mean/mode) will have all missing values in numric columns substituted by the mean of
                     the known values,
                     the categorical columns will instead use the mode</p>
-                  <ul id="sortable1" class="connectedSortable">
+                  <div class="tab-content tab-space">
+                    <div class="tab-pane active" id="{{average_rank[0]}}">
+                      <ul id="sortable1" class="connectedSortable">
+                        {% for tech in techniques %}
+                        {% if tech.dimension == average_rank[0] %}
+                        <li class="ui-state-default" id="{{tech.id}}">{{tech.text}}</li>
+                        {% endif %}
+                        {% endfor %}
+                      </ul>
+                    </div>
 
-                    {% for tech in techniques %}
-                    {% if tech.dimension == average_rank[0] %}
-                    <li class="ui-state-default" id="{{tech.id}}">{{tech.text}}</li>
-                    {% endif %}
-                    {% endfor %}
-                  
-                    {% for tech in techniques %}
-                    {% if tech.dimension == average_rank[1] %}
-                    <li class="ui-state-default" id="{{tech.id}}">{{tech.text}}</li>
-                    {% endif %}
-                    {% endfor %}
-                  
-                    {% for tech in techniques %}
-                    {% if tech.dimension == average_rank[2] %}
-                    <li class="ui-state-default" id="{{tech.id}}">{{tech.text}}</li>
-                    {% endif %}
-                    {% endfor %}
-                    
+                    <div class="tab-pane " id="{{average_rank[1]}}">
+                      <ul id="sortable2" class="connectedSortable">
+                        {% for tech in techniques %}
+                        {% if tech.dimension == average_rank[1] %}
+                        <li class="ui-state-default" id="{{tech.id}}">{{tech.text}}</li>
+                        {% endif %}
+                        {% endfor %}
+                      </ul>
+                    </div>
 
-                  </ul>
+                    <div class="tab-pane " id="{{average_rank[2]}}">
+                      <ul id="sortable3" class="connectedSortable">
+                        {% for tech in techniques %}
+                        {% if tech.dimension == average_rank[2] %}
+                        <li class="ui-state-default" id="{{tech.id}}">{{tech.text}}</li>
+                        {% endif %}
+                        {% endfor %}
+                      </ul>
+                    </div>
+
+                    </br>
+                    <p>Build your pipeline:</p></br>
+
+                    <ul id="sortableList" class="connectedSortable">
+
+                    </ul>
+                  </div>
 
                   </br>
-                </br><p>Build your pipeline:</p></br>
 
-                  <ul id="sortable2" class="connectedSortable">
-
-                  </ul>
 
                   <div class="row">
                     <div class="col-lg ml-auto mr-auto">
@@ -164,7 +179,7 @@
               </div>
               <div class="vr vr-blurry" color="#525f7f"></div>
               <div class="col-6">
-                
+
 
                 {% include 'home/Plots/table_df.html' %}
               </div>
@@ -201,20 +216,20 @@ jQuery UI library: This is a set of user interface widgets and effects built on 
 
 <!-- Specific Page JS goes HERE  -->
 
-<script src="{{ url_for('static', filename='3.6.0.js') }}"></script>
-<script src="{{ url_for('static', filename='jquery-ui.js') }}"></script>
+<script src="{{ config.ASSETS_ROOT }}/js/jquery-3.6.0.min.js"></script>
+<script src="{{ config.ASSETS_ROOT }}/js/jquery-ui.js"></script>
 
 
 <script>
   $(function () {
-    $("#sortable1, #sortable2").sortable({
+    $("#sortable1, #sortable2, #sortable3, #sortableList").sortable({
       connectWith: ".connectedSortable"
     }).disableSelection();
   });
 
   $(document).ready(function () {
     $("#save-and-apply").on("click", function () {
-      var sortedList = $("#sortable2").sortable("toArray");
+      var sortedList = $("#sortableList").sortable("toArray");
       $.ajax({
         type: "POST",
         url: "/apply",
@@ -234,6 +249,6 @@ jQuery UI library: This is a set of user interface widgets and effects built on 
 <script>
   $(document).ready(function () {
     $('#sample').DataTable();
-});
+  });
 </script>
 {% endblock javascripts %}
