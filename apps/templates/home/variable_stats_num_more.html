@@ -19,7 +19,7 @@
         <div class="card-body">
           <ul class="nav nav-pills nav-pills-primary">
 
-            
+
             <li class="nav-item">
               <a class="nav-link" data-toggle="tab" href="#common{{var}}">
                 Common values
@@ -38,133 +38,222 @@
 
           </ul>
           <div class="col-lg ml-auto mr-auto">
+
             <div class="tab-content tab-space">
 
-              
+
+
 
               <div class="tab-pane" id="common{{var}}">
-                <table class="table tablesorter " id="">
-                  <thead class=" text-primary">
-                    <tr>
-                      <th>
-                        Value
-                      </th>
-                      <th>
-                        Count
-                      </th>
-                      <th>
-                        Frequency
-                      </th>
+                <div class="row">
+                  <div class="col-5">
+                    <div class="table-responsive">
+                      <table class="table tablesorter " id="">
+                        <thead class=" text-primary">
+                          <tr>
+                            <th>
+                              Most Common Values
+                            </th>
+                            <th>
+                              Count
+                            </th>
+                            <th>
+                              Frequency
+                            </th>
 
-                    </tr>
-                  </thead>
+                          </tr>
+                        </thead>
 
-                  <tbody>
+                        <tbody>
 
-                    {% for variable, info in profile['variables'].items() %}
-                    {% if var==variable %}
+                          {% for variable, info in profile['variables'].items() %}
+                          {% if var==variable %}
 
-                    {% for val, count in info['value_counts_without_nan'].items() %}
-                    {% if loop.index < counter_5.value %}
-                    {% set freq = count / profile.variables[var].n * 100|json_round %}
-                    <tr>
-                      <td>
-                        {{ val }}
-                      </td>
-                      <td>
-                        {{ count }}
-                      </td>
-                      <td>
-                        <div class="progress-container progress-primary">
-                          <div class="progress">
-                            <div class="progress-bar w-{{freq}}" role="progressbar"
-                               aria-valuemin="0" aria-valuemax="100">
-                              
-                            </div>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        {{ freq|round(2) }}%
-                      </td>
-                    </tr>
+                          {% for val, count in info['value_counts_without_nan'].items() %}
+                          {% if loop.index < counter_5.value %} {% set freq=count / profile.variables[var].n *
+                            100|json_round %} <tr>
+                            <td>
+                              {{ val }}
+                            </td>
+                            <td>
+                              {{ count }}
+                            </td>
+                            <td>
+                              {{ freq|round(2) }}%
+                            </td>
+                            </tr>
 
-                    {% endif %}
-                    {% endfor %}
-                    
-
-                    {% endif %}
-                    {% endfor %}
+                            {% endif %}
+                            {% endfor %}
 
 
-                  </tbody>
-                </table>
+                            {% endif %}
+                            {% endfor %}
 
+
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <div class="col-2"></div>
+                  <div class="col-5">
+                    <div class="table-responsive">
+                      <table class="table tablesorter " id="">
+                        <thead class=" text-primary">
+                          <tr>
+                            <th>
+                              Least Common Values
+                            </th>
+                            <th>
+                              Count
+                            </th>
+                            <th>
+                              Frequency
+                            </th>
+
+                          </tr>
+                        </thead>
+
+                        <tbody>
+
+                          {% for variable, info in profile['variables'].items() %}
+                          {% if var==variable %}
+
+                          {% for val, count in info['value_counts_without_nan'].items()|reverse %}
+                          {% if loop.index < counter_5.value %} {% set freq=count / profile.variables[var].n *
+                            100|json_round %} <tr>
+                            <td>
+                              {{ val }}
+                            </td>
+                            <td>
+                              {{ count }}
+                            </td>
+                            <td>
+                              {{ freq|round(2) }}%
+                            </td>
+                            </tr>
+
+                            {% endif %}
+                            {% endfor %}
+
+
+                            {% endif %}
+                            {% endfor %}
+
+
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
               </div>
-
               <div class="tab-pane" id="extreme{{var}}">
-                <table class="table tablesorter " id="">
-                  <thead class=" text-primary">
-                    <tr>
-                      <th>
-                        Value
-                      </th>
-                      <th>
-                        Count
-                      </th>
-                      <th>
-                        Frequency
-                      </th>
+                <div class="row">
+                  <div class="col-5">
+                    <div class="table-responsive">
+                      <table class="table tablesorter " id="">
+                        <thead class=" text-primary">
+                          <tr>
+                            <th>
+                              Lowest Values
+                            </th>
+                            <th>
+                              Count
+                            </th>
+                            <th>
+                              Frequency
+                            </th>
 
-                    </tr>
-                  </thead>
+                          </tr>
+                        </thead>
 
-                  <tbody>
-                    {% for variable, info in profile['variables'].items() %}
-                    {% if var==variable %}
+                        <tbody>
 
-                    {% for val, count in info['value_counts_index_sorted'].items() %}
-                    {% if loop.index < counter_5.value %}
-                    {% set freq = count / profile.variables[var].n * 100|json_round %}
+                          {% for variable, info in profile['variables'].items() %}
+                          {% if var==variable %}
 
-                    <tr>
-                      <td>
-                        {{ val }}
-                      </td>
-                      <td>
-                        {{ count }}
-                      </td>
-                      <td>
-                        <div class="progress-container progress-primary">
-                          <div class="progress">
-                            <div class="progress-bar w-{{freq}}" role="progressbar"
-                              aria-valuemin="0" aria-valuemax="100">
-                              
-                            </div>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        {{ freq|round(2) }}%
-                      </td>
-                    </tr>
+                          {% for val, count in info['value_counts_index_sorted'].items() %}
+                          {% if loop.index < counter_5.value %} {% set freq=count / profile.variables[var].n *
+                            100|json_round %} <tr>
+                            <td>
+                              {{ val }}
+                            </td>
+                            <td>
+                              {{ count }}
+                            </td>
+                            <td>
+                              {{ freq|round(2) }}%
+                            </td>
+                            </tr>
 
-                    {% endif %}
-                    {% endfor %}
-
-                    
-                                      
-                    {% endif %}
-                    {% endfor %}
+                            {% endif %}
+                            {% endfor %}
 
 
-                  </tbody>
-                </table>
+                            {% endif %}
+                            {% endfor %}
+
+
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <div class="col-2"></div>
+                  <div class="col-5">
+                    <div class="table-responsive">
+                      <table class="table tablesorter " id="">
+                        <thead class=" text-primary">
+                          <tr>
+                            <th>
+                              Highest Values
+                            </th>
+                            <th>
+                              Count
+                            </th>
+                            <th>
+                              Frequency
+                            </th>
+
+                          </tr>
+                        </thead>
+
+                        <tbody>
+
+                          {% for variable, info in profile['variables'].items() %}
+                          {% if var==variable %}
+
+                          {% for val, count in info['value_counts_index_sorted'].items()|reverse %}
+                          {% if loop.index < counter_5.value %} {% set freq=count / profile.variables[var].n *
+                            100|json_round %} <tr>
+                            <td>
+                              {{ val }}
+                            </td>
+                            <td>
+                              {{ count }}
+                            </td>
+                            <td>
+                              {{ freq|round(2) }}%
+                            </td>
+                            </tr>
+
+                            {% endif %}
+                            {% endfor %}
+
+
+                            {% endif %}
+                            {% endfor %}
+
+
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
               </div>
 
-              <div class="tab-pane" id="hist{{var}}">
+              <!-- <div class="tab-pane" id="hist{{var}}">
                 {% include distr_html_list[count_num.value] %}
-              </div>
+              </div> -->
 
 
             </div>

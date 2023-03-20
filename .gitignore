@@ -11,5 +11,3 @@ env/
 env__/
 .vscode/symbols.json
 app/db.sqlite3
-flask_session/465b57b95568ac0c65344f5d9f78f940
-flask_session/2029240f6d1128be89ddc32729463129
