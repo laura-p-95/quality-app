@@ -61,6 +61,18 @@
             <td>Unique</td>
             <td>{{profile.variables[var].n_unique}}</td>
           </tr>
+          <tr>
+            <td>Maximum Number of Characters</td>
+            <td>{{profile.variables[var].max_length}}</td>
+          </tr>
+          <tr>
+            <td>Minumum Number of Characters</td>
+            <td>{{profile.variables[var].min_length}}</td>
+          </tr>
+          <tr>
+            <td>Total Number of Characters</td>
+            <td>{{profile.variables[var].n_characters}}</td>
+          </tr>
 
         </tbody>
 
@@ -85,8 +97,18 @@
             <td>Unique(%)</td>
             <td>{{profile.variables[var].p_unique|json_round}}</td>
           </tr>
-          
-
+          <tr>
+            <td>Mean of Number of Characters</td>
+            <td>{{profile.variables[var].mean_length|json_round}}</td>
+          </tr>
+          <tr>
+            <td>Median of Number of Characters</td>
+            <td>{{profile.variables[var].median_length|json_round}}</td>
+          </tr>
+          <tr>
+            <td>Number of Distinct Characters</td>
+            <td>{{profile.variables[var].n_characters_distinct|json_round}}</td>
+          </tr>
         </tbody>
 
       </table>
@@ -98,9 +120,9 @@
       <div class="col-lg ml-auto mr-auto">
         {% include distrCAT_html_list[count_cat.value] %}
       </div>
-      
+
     </div>
-    
+
 
 
 

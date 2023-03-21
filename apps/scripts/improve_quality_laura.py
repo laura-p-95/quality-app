@@ -31,10 +31,10 @@ def outlier_correction(dataset, outlier_range):
         index = dataset.columns.get_loc(col)
 
         if (dataset[col].dtype != "object"):
-            if ((dataset[col].mean() < outlier_range[index][0]) | (dataset[col].mean() > outlier_range[index][1])):
+            # if ((dataset[col].mean() < outlier_range[index][0]) | (dataset[col].mean() > outlier_range[index][1])):
                 dataset.loc[((dataset[col] < outlier_range[index][0]) | (dataset[col] > outlier_range[index][1])) & dataset[col].notnull(),col]=np.nan
-            else:
-                dataset.loc[((dataset[col] < outlier_range[index][0]) | (dataset[col] > outlier_range[index][1])) & dataset[col].notnull(),col]=dataset[col].mean()
+            # else:
+            #     dataset.loc[((dataset[col] < outlier_range[index][0]) | (dataset[col] > outlier_range[index][1])) & dataset[col].notnull(),col]=dataset[col].mean()
         # else:
         #     dataset.loc[~dataset[col].isin(outlier_range[index]) & dataset[col].notnull(),col]=dataset[col].mode()[0]
         #     dataset.loc[~dataset[col].isin(outlier_range[index]) & dataset[col].notnull(), col] = np.nan

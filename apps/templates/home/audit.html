@@ -1,6 +1,6 @@
 {% extends "layouts/base.html" %}
 
-{% block title %} Dashboard {% endblock %} 
+{% block title %} Dashboard {% endblock %}
 
 <!-- Specific Page CSS goes HERE  -->
 {% block stylesheets %}{% endblock stylesheets %}
@@ -10,102 +10,112 @@
 <div class="content">
 
     {% include 'home/upload_after.html' %}
-    
-        <div class="row">
-            <div class="col-12">
-                <div class="card card-chart">
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card card-chart">
 
 
-                    <form method="post">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="card-header">
-                                    <h5 class="card-category">Phese Two</h5>
-                                    <h3 class="card-title"><i class="tim-icons icon-bullet-list-67"></i> Select the features</h3>
-                                    <p>
-                                        
-                                        
-                                </div>
-                                
-                                <div class="col-lg ml-auto mr-auto">
-                                    <div class="row">
-                                        <div class="col-md-11 ">
-                                            <p>Select the features you are interested in processing (multiple choice is possible)</p>
-                                                {% for col in columns %}
-                                                <tr>
-                                                    <td>
-                                                        <input type="checkbox" name="{{col}}" value="{{col}}" checked="checked">&nbsp;{{col}}<br>
-                                                    </td>
-                                                </tr>
-                                                {% endfor %}
-                                            </br>
-                                            
-                                        </div>
+                <form method="post">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card-header">
+                                <h5 class="card-category">Phese Two</h5>
+                                <h3 class="card-title"><i class="tim-icons icon-bullet-list-67"></i> Select the features
+                                </h3>
+                                <p>
+
+
+                            </div>
+
+                            <div class="col-lg ml-auto mr-auto">
+                                <div class="row">
+                                    <div class="col-md-11 ">
+                                        <p>Select the features you are interested in processing (multiple choice is
+                                            possible)</p>
+                                        {% for col in columns %}
+                                        <tr>
+                                            <td>
+                                                <input type="checkbox" name="{{col}}" value="{{col}}"
+                                                    checked="checked">&nbsp;{{col}}<br>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                        </br>
+
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="card-header">
-                                    <h5 class="card-category"></h5>
-                                    <h3 class="card-title"><i class="tim-icons icon-vector"></i> Select the algorithm (optional)</h3>
-                                </div>
-                                
-                                <div class="col-lg ml-auto mr-auto">
-                                    <div class="row">
-                                        <div class="col-md-11">
-                                            <p>Select the ML algorithm you intent on using. This selection is optional but not selecting it might leave problems in the data</p>
-                                            </p>
-                                            <p><input type='radio' name='algorithm' value='DT' id='id1' checked="checked"> Decision Tree</p>
-                                            <p><input type='radio' name='algorithm' value='KNN' id='id2'> K-Nearest Neighbor</p>
-                                            <p><input type='radio' name='algorithm' value='NB' id='id3'> Naive Bayes</p>
-                                            <p>
-                                        </div>
-                                    </div>
-                                </div>
-                                </br></br></br>
-                                <div class="card-header">
-                                    <h5 class="card-category"></h5>
-                                    <h3 class="card-title"><i class="tim-icons icon-vector"></i> Functional dependencies</h3>
-                                </div>
-                                
-                                <div class="col-lg ml-auto mr-auto">
-                                    <p>Write the values</p>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card-header">
+                                <h5 class="card-category"></h5>
+                                <h3 class="card-title"><i class="tim-icons icon-vector"></i> Select the algorithm
+                                    (optional)</h3>
+                            </div>
+
+                            <div class="col-lg ml-auto mr-auto">
+                                <div class="row">
                                     <div class="col-md-11">
-                                        <tr>
-                                            <td>
-                                                <p>Support (%)</p>
-                                            </td>
-                                            <td>
-                                                <input type="text" class="form-control" name="Support" placeholder='80'>
-                                            </td>
-                                        </tr>
-                                    </br>
-                                        <tr>
-                                            <td>
-                                                <p>Confidence (%)</p>
-                                            </td>
-                                            <td>
-                                                <input type="text" class="form-control" name="Confidence" placeholder='Automatic value: 90'>
-                                            </td>
-                                        </tr>
-                                    </br>
+                                        <p>Select the ML algorithm you intent on using. This selection is optional but
+                                            not selecting it might leave problems in the data</p>
+                                        </p>
+                                        <p><input type='radio' name='algorithm' value='DT' id='id1' checked="checked">
+                                            Decision Tree</p>
+                                        <p><input type='radio' name='algorithm' value='KNN' id='id2'> K-Nearest Neighbor
+                                        </p>
+                                        <p><input type='radio' name='algorithm' value='NB' id='id3'> Naive Bayes</p>
+                                        <p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-12 ">
-                                <input class="btn btn-primary btn-lg btn-block btn-group" type="submit" name="submit" value="Profiling">
+                            </br></br></br>
+                            <div class="card-header">
+                                <h5 class="card-category"></h5>
+                                <h3 class="card-title"><i class="tim-icons icon-vector"></i> Functional dependencies
+                                </h3>
                             </div>
-                            
-                    </form>
-                    
-                    </br></br>
-                    <!-- <canvas id="upload_dataset"></canvas> -->
-                </div>
+
+                            <div class="col-lg ml-auto mr-auto">
+                                <p>Write the values</p>
+                                <div class="col-md-11">
+                                    <tr>
+                                        <td>
+                                            <p>Support (%)</p>
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" name="Support" placeholder='80'>
+                                        </td>
+                                    </tr>
+                                    </br>
+                                    <tr>
+                                        <td>
+                                            <p>Confidence (%)</p>
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" name="Confidence"
+                                                placeholder='Automatic value: 90'>
+                                        </td>
+                                    </tr>
+                                    </br>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 ">
+                            <input class="btn btn-primary btn-lg btn-block btn-group" type="submit" name="submit"
+                                value="Profiling">
+                        </div>
+
+                </form>
+
+                </br></br>
+                <!-- <canvas id="upload_dataset"></canvas> -->
             </div>
         </div>
-
-
     </div>
+
+
+</div>
 
 {% endblock content %}
 

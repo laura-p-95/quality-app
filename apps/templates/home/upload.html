@@ -74,7 +74,7 @@
     .image-dropping,
     .image-upload-wrap:hover {
 
-        background-image: linear-gradient(to bottom left, #e14eca, #ba54f5 ) !important;
+        background-image: linear-gradient(to bottom left, #e14eca, #ba54f5) !important;
         background-image: -moz-linear-gradient(to bottom left, #e14eca, #ba54f5) !important;
         background-color: #e14eca;
         border: 2px dashed #db2dc0;
@@ -97,7 +97,7 @@
         color: #ffffff;
         padding: 60px 0;
     }
-  
+
 
     .file-upload-image {
         max-height: 200px;
@@ -160,30 +160,7 @@
 
                             </p>
                         </div>
-                        <div>
-                            <script class="jsbin"
-                                src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-                            <div class="file-upload">
-                                <button class="file-upload-btn" type="button"
-                                    onclick="$('.file-upload-input').trigger( 'click' )">Add Image</button>
-
-                                <div class="image-upload-wrap">
-                                    <input class="file-upload-input" type='file' onchange="readURL(this);"
-                                        accept="image/*" />
-                                    <div class="drag-text">
-                                        <h3>Drag and drop a file or select add Image</h3>
-                                    </div>
-                                </div>
-                                <div class="file-upload-content">
-                                    <img class="file-upload-image" src="#" alt="your image" />
-                                    <div class="image-title-wrap">
-                                        <button type="button" onclick="removeUpload()" class="remove-image">Remove <span
-                                                class="image-title">Uploaded Image</span></button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> <br /><br /><br /><br />
-
+                        
                         <div class="col-md-3">
                             <form method="post" enctype="multipart/form-data" action="{{ url_for('upload_file') }}"
                                 type="button" class="btn btn-fill btn-primary">
@@ -195,23 +172,7 @@
                             </form>
 
                         </div>
-                        
-                        
-                        <!-- <div class="col-md-2 btn-group-vertical btn-group-toggle">
-                            <button type="button" class="btn btn-fill btn-primary font-icon-detail-small"  name="iris">                                  
-                                    <i class="tim-icons icon-cloud-upload-94"></i><br/><br/>Iris dataset
-                                    <form method=get action="{{ url_for('upload_sample', name='iris') }}">
-                                        <input class="btn btn-fill btn-info" type=submit value=iris >
-                                    </form>
-                                    
-                            </button>
-                            <button type="button" class="btn btn-fill btn-primary font-icon-detail-small" name="beers">  
-                                    <i class="tim-icons icon-cloud-upload-94"></i><br/><br/>Beer dataset
-                                    <form method=get action="{{ url_for('upload_sample', name='beers') }}">
-                                        <input class="btn btn-fill btn-info" type=submit value=iris >
-                                    </form>
-                            </button>
-                        </div> -->
+
 
                     </div></br>
                 </div></br>
@@ -219,17 +180,6 @@
             </div>
         </div>
     </div>
-
-
-
-
-
-
-
-
-
-
-
 
 
 

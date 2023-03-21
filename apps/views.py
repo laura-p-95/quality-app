@@ -22,7 +22,7 @@ import apps.scripts.improve_quality_laura as improve
 import apps.scripts.data_imputation_tecniques as imputes
 from apps.scripts.preprocessing import preprocess_input_df
 from flask_session import Session
-
+import time
 import json
 import matplotlib
 matplotlib.use('Agg')
@@ -293,29 +293,26 @@ def submit_outliers():
 
 def get_techniques():
     return [
-        {"id": "remove_duplicates", "name": "",  "text": "Remove duplicates", "dimension":"UNIQUENESS" },
-        {"id": "impute_standard", "name": "Standard",  "text": "Impute missing values (0/Missing)", "dimension":"COMPLETENESS"},
+        {"id": "remove_duplicates", "text": "Remove duplicates", "dimension":"UNIQUENESS" },
+
+        {"id": "impute_standard", "text": "Imputation (0/Missing)", "dimension":"COMPLETENESS"},
+        {"id": "drop_rows", "text": "Drop rows with missing values", "dimension":"COMPLETENESS"},
+        {"id": "impute_mean",  "text": "Imputation (mean/mode)", "dimension":"COMPLETENESS"},
+        {"id": "impute_std",  "text": "Imputation (standard deviation/mode)", "dimension":"COMPLETENESS"},
+        {"id": "impute_mode",  "text": "Imputation (mode)", "dimension":"COMPLETENESS"},
+        {"id": "impute_median",  "text": "Imputation (median/mode)", "dimension":"COMPLETENESS"},
+        {"id": "impute_knn", "text": "Imputation using KNN", "dimension":"COMPLETENESS"},
+        {"id": "impute_mice",  "text": "Imputation using Mice", "dimension":"COMPLETENESS"},
         
-        {"id": "drop_rows", "name": "", "text": "Drop rows with missing values", "dimension":"COMPLETENESS"},
-        {"id": "impute_mean", "name": "Mean", "text": "Impute missing values (mean/mode)", "dimension":"COMPLETENESS"},
-        {"id": "impute_std", "name": "Std", "text": "Impute missing values (standard deviation/mode)", "dimension":"COMPLETENESS"},
-        {"id": "impute_mode", "name": "Mode", "text": "Impute missing values (mode)", "dimension":"COMPLETENESS"},
-        {"id": "impute_median", "name": "Median", "text": "Impute missing values (median/mode)", "dimension":"COMPLETENESS"},
-        {"id": "impute_knn", "name": "KNN", "text": "Impute missing values of numerical variables using KNN", "dimension":"COMPLETENESS"},
-        {"id": "impute_knn_cat", "name": "KNN", "text": "Impute missing values of categorical variables using KNN", "dimension":"COMPLETENESS"},
-        {"id": "impute_mice", "name": "Mice", "text": "Impute missing values of numerical variables using Mice", "dimension":"COMPLETENESS"},
-        {"id": "impute_mice_cat", "name": "Mice", "text": "Impute missing values of categorical variables using Mice", "dimension":"COMPLETENESS"},
-        
-        {"id": "outlier_correction", "name": "", "text": "Outlier correction", "dimension":"ACCURACY"},
-        {"id": "oc_impute_standard", "name": "Standard", "text": "Outlier correction with imputation ((0/Missing)", "dimension":"ACCURACY"},
-        
-        {"id": "oc_drop_rows", "name": "", "text": "Outlier correction with drop rows", "dimension":"ACCURACY"},
-        {"id": "oc_impute_mean", "name": "Mean", "text": "Outlier correction with imputation (mean/mode)", "dimension":"ACCURACY"},
-        {"id": "oc_impute_std", "name": "Std", "text": "Outlier correction with imputation (standard deviation/mode)", "dimension":"ACCURACY"},
-        {"id": "oc_impute_mode", "name": "Mode", "text": "Outlier correction with imputation (mode)", "dimension":"ACCURACY"},
-        {"id": "oc_impute_median", "name": "Median", "text": "Outlier correction with imputation (median/mode)", "dimension":"ACCURACY"},
-        {"id": "oc_impute_knn", "name": "KNN", "text": "Outlier correction with imputation (KNN)", "dimension":"ACCURACY"},
-        {"id": "oc_impute_mice", "name": "Mice", "text": "Outlier correction with imputation (Mice)", "dimension":"ACCURACY"}
+        {"id": "outlier_correction", "text": "Outlier correction", "dimension":"ACCURACY"},
+        {"id": "oc_impute_standard",  "text": "Outlier correction with imputation ((0/Missing)", "dimension":"ACCURACY"},
+        {"id": "oc_drop_rows",  "text": "Outlier correction with drop rows", "dimension":"ACCURACY"},
+        {"id": "oc_impute_mean", "text": "Outlier correction with imputation (mean/mode)", "dimension":"ACCURACY"},
+        {"id": "oc_impute_std", "text": "Outlier correction with imputation (standard deviation/mode)", "dimension":"ACCURACY"},
+        {"id": "oc_impute_mode", "text": "Outlier correction with imputation (mode)", "dimension":"ACCURACY"},
+        {"id": "oc_impute_median", "text": "Outlier correction with imputation (median/mode)", "dimension":"ACCURACY"},
+        {"id": "oc_impute_knn", "text": "Outlier correction with imputation (KNN)", "dimension":"ACCURACY"},
+        {"id": "oc_impute_mice", "text": "Outlier correction with imputation (Mice)", "dimension":"ACCURACY"}
     ]
 
 # {"id": "oc_drop_cols", "name": "", "text": "Outlier correction with drop columns", "dimension":"ACCURACY"},
@@ -327,18 +324,33 @@ def save_and_apply():
     sorted_list = request.get_json()
     # do something with the sorted list
     print(sorted_list)
+    df = last_dataframe()
 
     # global column_list
     # cols= column_list
-    # cols = session.get('selected_attributes', [])
-    df = last_dataframe()
-    
+    cols = session.get('selected_attributes', [])
     min_values = session.get('min_values', [])
     max_values = session.get('max_values', [])
-    outlier_range = [list(x) for x in zip(min_values, max_values)]
+    range_min = []
+    range_max = []
+    index = 0
+    #create range_min and range_max to insert zeros as ranges for the categorical variables(to make outlier correction work)
+    for col in cols:
+        if (df[col].dtype != "object"):
+            range_min.append(min_values[index])
+            range_max.append(max_values[index])
+            index = index + 1
+        else:
+            range_min.append(0)
+            range_max.append(0)
+
+
+    outlier_range = [list(x) for x in zip(range_min, range_max)]
     print(outlier_range)
 
     for tech in sorted_list:
+        
+
         if tech == "remove_duplicates":
             df = improve.remove_duplicates(df)
             print("Success")
@@ -379,27 +391,30 @@ def save_and_apply():
             print("Success")
             
 
+        # elif tech == "impute_knn":
+        #     impute = imputes.impute_knn()
+        #     df = impute.fit(df)
+        #     df=df
+        #     print("Success")
+            
+
         elif tech == "impute_knn":
-            impute = imputes.impute_knn()
-            df = impute.fit(df)
+            # impute = imputes.impute_knn()
+            # df = impute.fit_cat(df)
+            df = df
             print("Success")
             
 
-        elif tech == "impute_knn_cat":
-            impute = imputes.impute_knn()
-            df = impute.fit_cat(df)
-            print("Success")
+        # elif tech == "impute_mice":
+        #     impute = imputes.impute_mice()
+        #     df = impute.fit(df)
+        #     print("Success")
             
 
         elif tech == "impute_mice":
-            impute = imputes.impute_mice()
-            df = impute.fit(df)
-            print("Success")
-            
-
-        elif tech == "impute_mice_cat":
-            impute = imputes.impute_mice()
-            df = impute.fit_cat(df)
+            # impute = imputes.impute_mice()
+            # df = impute.fit_cat(df)
+            df = df
             print("Success")
             
 
@@ -452,22 +467,23 @@ def save_and_apply():
 
         elif tech == "oc_impute_knn":
             df = improve.outlier_correction(df, outlier_range)
-            impute = imputes.impute_knn()
-            df = impute.fit(df)
+            # impute = imputes.impute_knn()
+            # df = impute.fit(df)
+            
             print("Success")
             
 
         elif tech == "oc_impute_mice":
             df = improve.outlier_correction(df, outlier_range)
-            impute = imputes.impute_mice()
-            df = impute.fit(df)
+            # impute = imputes.impute_mice()
+            # df = impute.fit(df)
             print("Success")
-    
+            
     global dataframes
     dataframes.append(df)
     save_data(df) #saves the dataframe in file data.csv
     
-    return "Changes applied successfully."
+    return print("Changes applied successfully")
 
     
     
@@ -478,12 +494,15 @@ def save_and_apply():
 
 @app.route('/dataprofiling/<name>/<dirname>/<algorithm>/<support>/<confidence>/', methods=['GET', 'POST'])
 def data_profiling(name, dirname, algorithm, support, confidence):
+    time.sleep(5)
     # access selected_attributes from session
     col_list = session.get('selected_attributes', '0')
     columns=col_list
     
     # access dataframe from global
-    df = last_dataframe()
+    # df = last_dataframe()
+    global dataframes
+    df = dataframes[-1]
     
     global column_list
     if column_list[0]==0:
@@ -496,7 +515,6 @@ def data_profiling(name, dirname, algorithm, support, confidence):
     df = df[:][columns]
     columns_names= list(df.columns)
 
-    global dataframes
     i = len(dataframes)
     profile_path = (f'apps/report/profile_{i}.json')
     if os.path.isfile(profile_path):
@@ -630,8 +648,8 @@ def data_profiling(name, dirname, algorithm, support, confidence):
 @app.route('/apply_modifications/<name>/<dirname>/<algorithm>/<support>/<confidence>/', methods=['GET', 'POST'])
 def apply_modifications(name,dirname,algorithm,support,confidence):
                
-
-        return redirect(url_for("data_profiling",
+    
+    return redirect(url_for("data_profiling",
                         name=name,
                         dirname=dirname,
                         algorithm=algorithm,

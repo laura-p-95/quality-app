@@ -73,7 +73,7 @@ def distributionPlot(df,typeNUMlist):
         fig = ff.create_distplot([data], [var])
 
         # Update the layout of the figure
-        fig.update_layout(xaxis_title='Value', yaxis_title='Density', width=600, autosize=True,)
+        fig.update_layout(xaxis_title='Value', yaxis_title='Density', width=500, autosize=True,)
 
         # Add the figure to the list
         fig_list.append(fig)
@@ -83,7 +83,7 @@ def distributionPlot(df,typeNUMlist):
         fig.update_layout(showlegend=False, font = dict(color = '#ced4da'), paper_bgcolor="#27293d", margin=dict(l=5, r=10, b=5, t=30))
         fig_json = fig.to_plotly_json()
         fig_obj = go.Figure(fig_json['data'], fig_json['layout'])
-        fig_obj.update_layout(height=300, width=600)
+        fig_obj.update_layout(height=300, width=500)
         fig_obj.update_traces(marker=dict(color='#1f77b4'))
         fig_obj.update_yaxes(title_text='Density')
         fig_obj.update_xaxes(title_text='Value')
