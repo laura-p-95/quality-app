@@ -168,16 +168,39 @@
                     <p>Build your pipeline:</p>
 
                     <ul id="sortableList" class="connectedSortable">
-                      
+                      {% if wants_support == "Yes" %}
+                      {% for tech in techniques %}
+                     
+                      {% if tech.dimension == average_rank[0] %}
+                      {% if tech.id == "remove_duplicates" or tech.id == "impute_standard" or tech.id == "outlier_correction"  %} 
+                      <li class="ui-state-default" id="{{tech.id}}">{{tech.text}}</li>
+                     
+                      {% endif %}
+                      {% endif %}
+                      {% endfor %}
+
                       {% for tech in techniques %}
 
-                      {% if tech.dimension == average_rank[ranking_num.value] %}
-                      
+                      {% if tech.dimension == average_rank[1] %}
+                      {% if tech.id == "remove_duplicates" or tech.id == "impute_standard" or tech.id == "outlier_correction"  %}
                       <li class="ui-state-default" id="{{tech.id}}">{{tech.text}}</li>
-                        {% set ranking_num.value = ranking_num.value + 1 %}
-                        {% endif %}
-                        {% endfor %}
-                        
+                      {% endif %}
+
+                      {% endif %}
+                      {% endfor %}
+
+                      {% for tech in techniques %}
+
+                      {% if tech.dimension == average_rank[2] %}
+                      {% if tech.id == "remove_duplicates" or tech.id == "impute_standard" or tech.id == "outlier_correction"  %}
+                      <li class="ui-state-default" id="{{tech.id}}">{{tech.text}}</li>
+                      
+                      {% endif %}
+                      {% endif %}
+                      {% endfor %}
+                      {% endif %}
+                      
+
                     </ul>
                   </div>
 

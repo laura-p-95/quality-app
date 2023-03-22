@@ -217,16 +217,18 @@ def audit_file(name, dirname):
     # global column_list
     # column_list = get_columns(selected_attributes)
     
-    
+    wants_support=request.form.get('req_support')
 
-    if request.form.get('Support'):
-        support = request.form.get('Support')
-    else: support = 80
+    # if request.form.get('Support'):
+    #     support = request.form.get('Support')
+    # else: support = 80
+    support=80
     session['support'] = support
     
-    if request.form.get('Confidence'):
-        confidence = request.form.get('Confidence')
-    else: confidence = 90
+    # if request.form.get('Confidence'):
+    #     confidence = request.form.get('Confidence')
+    # else: confidence = 90
+    confidence = 90
     session['confidence'] = confidence
 
     
@@ -259,6 +261,7 @@ def audit_file(name, dirname):
                         name=name,
                         dirname=dirname,
                         algorithm=algorithm,
+                        wants_support=wants_support,
                     
                         support=support,
                         confidence=confidence
@@ -498,8 +501,8 @@ def save_and_apply():
 
 
 
-@app.route('/dataprofiling/<name>/<dirname>/<algorithm>/<support>/<confidence>/', methods=['GET', 'POST'])
-def data_profiling(name, dirname, algorithm, support, confidence):
+@app.route('/dataprofiling/<name>/<dirname>/<algorithm>/<support>/<confidence>/<wants_support>', methods=['GET', 'POST'])
+def data_profiling(name, dirname, algorithm, support, confidence, wants_support):
     # time.sleep(5)
     # access selected_attributes from session
     col_list = session.get('selected_attributes', '0')
@@ -621,6 +624,7 @@ def data_profiling(name, dirname, algorithm, support, confidence):
                         name=name,
                         dirname=dirname,
                         algorithm=algorithm,
+                        wants_support=wants_support,
                     
                         support=support,
                         confidence=confidence))
@@ -640,6 +644,7 @@ def data_profiling(name, dirname, algorithm, support, confidence):
 
                                 typeList=typeList,
                                 typeNUMlist=typeNUMlist,
+                                wants_support=wants_support,
 
                                 min_values=min_values,
                                 max_values=max_values,
@@ -656,14 +661,15 @@ def data_profiling(name, dirname, algorithm, support, confidence):
 
 
 
-@app.route('/apply_modifications/<name>/<dirname>/<algorithm>/<support>/<confidence>/', methods=['GET', 'POST'])
-def apply_modifications(name,dirname,algorithm,support,confidence):
+@app.route('/apply_modifications/<name>/<dirname>/<algorithm>/<support>/<confidence>/<wants_support>/', methods=['GET', 'POST'])
+def apply_modifications(name,dirname,algorithm,support,confidence,wants_support):
                
     
     return redirect(url_for("data_profiling",
                         name=name,
                         dirname=dirname,
                         algorithm=algorithm,
+                        wants_support=wants_support,
                     
                         support=support,
                         confidence=confidence
