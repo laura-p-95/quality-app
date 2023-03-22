@@ -2,20 +2,19 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <div class="col-5">
   <div class="card card-chart">
-    <form disabled method="post">
+    <form method="post">
       <div class="card-header">
         <h3 class="card-title"><i class="tim-icons icon-bullet-list-67"></i> Selected features</h3>
       </div>
       <div class="col-lg ml-auto mr-auto">
-        <p>Selected features:
-          {% for col in columns %}
+        <p>{% for col in columns %}
           <b>{{col}},&nbsp;</b>
           {% endfor %}
         </p>
         </br>
       </div>
       <div class="card-header">
-        <h3 class="card-title"><i class="tim-icons icon-bullet-list-67"></i> Selected algorithm</h3>
+        <h3 class="card-title"><i class="tim-icons icon-atom"></i> Selected algorithm</h3>
       </div>
       <div class="col-lg ml-auto mr-auto">
         {% if algorithm=='DT': %}
@@ -28,9 +27,7 @@
         </br>
       </div>
       <div class="card-header">
-        <h5 class="card-category">Phese Two</h5>
-        <h3 class="card-title"><i class="tim-icons icon-bullet-list-67"></i>Functional dependencies
-        </h3>
+        <h3 class="card-title"><i class="tim-icons icon-vector"></i> Functional dependencies</h3>
         <p>
       </div>
       <div class="col-lg ml-auto mr-auto">

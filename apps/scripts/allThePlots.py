@@ -73,7 +73,7 @@ def distributionPlot(df,typeNUMlist):
         fig = ff.create_distplot([data], [var])
 
         # Update the layout of the figure
-        fig.update_layout(xaxis_title='Value', yaxis_title='Density', width=500, autosize=True,)
+        fig.update_layout(xaxis_title='Value', yaxis_title='Density', width=500, height=400)
 
         # Add the figure to the list
         fig_list.append(fig)
@@ -110,7 +110,7 @@ def distributionCategorical(df,typeCATlist):
             vc = df[var].value_counts()
             vc_df = pd.DataFrame({'var': vc.index, 'count': vc.values})
             fig = px.bar(vc_df, x='var', y='count')
-            fig.update_layout(xaxis_title='Value', yaxis_title='Count', width=600, autosize=True, font = dict(color = '#ced4da'), paper_bgcolor="#27293d", margin=dict(l=5, r=10, b=5, t=30))
+            fig.update_layout(xaxis_title='Value', yaxis_title='Count', width=500, height=400, font = dict(color = '#ced4da'), paper_bgcolor="#27293d", margin=dict(l=5, r=10, b=5, t=30))
             
             filename = f"apps/templates/home/Plots/barCATPlot_{num}.html"
             name = f"home/Plots/barCATPlot_{num}.html"

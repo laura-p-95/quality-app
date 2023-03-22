@@ -127,18 +127,18 @@ def append_dataframe(df):
 
 
 #delete json report once the upload or new upload is pressed
-@app.route('/delete_file', methods=['POST'])
-def delete_file():
+# @app.route('/delete_file', methods=['POST'])
+# def delete_file():
        
-    # Create a relative file path using os.path.join()
-    file_path = os.path.join(HERE, 'report\profile.json')
+#     # Create a relative file path using os.path.join()
+#     file_path = os.path.join(HERE, 'report/profile.json')
 
-    # Delete the file
-    os.remove(file_path)
+#     # Delete the file
+#     os.remove(file_path)
     
-    # Return a JSON response with a success message
-    response = jsonify({'message': 'File deleted successfully'})
-    return response
+#     # Return a JSON response with a success message
+#     response = jsonify({'message': 'File deleted successfully'})
+#     return response
     
 
 # App main route + generic routing
@@ -239,14 +239,20 @@ def audit_file(name, dirname):
     # df_copy = df.copy()
     # session['df_list'] = []
     # session['df_list'].append(df_copy.to_dict(orient='records'))
+    if str(request.form.get("submit")) == "Upload new dataset":
+        session.clear()
+        return redirect(url_for('upload'))
     
     if str(request.form.get("submit")) == "Profiling":
         profile = ProfileReport(df)
-        # i=len(session['df_list'])
-        # global dataframes
-        i=len(dataframes)
-        profile.to_file(f'apps/report/profile_{i}.json')
-        # profile.to_file('apps/report\profile.json')
+        
+        #code for multiple profiles
+        # i=len(dataframes)
+        # profile.to_file(f'apps/report/profile_{i}.json')
+
+        # code for single profile
+        profile.to_file('apps/report/profile.json')
+
         
 
         return redirect(url_for("data_profiling",
@@ -305,7 +311,7 @@ def get_techniques():
         {"id": "impute_mice",  "text": "Imputation using Mice", "dimension":"COMPLETENESS"},
         
         {"id": "outlier_correction", "text": "Outlier correction", "dimension":"ACCURACY"},
-        {"id": "oc_impute_standard",  "text": "Outlier correction with imputation ((0/Missing)", "dimension":"ACCURACY"},
+        {"id": "oc_impute_standard",  "text": "Outlier correction with imputation (0/Missing)", "dimension":"ACCURACY"},
         {"id": "oc_drop_rows",  "text": "Outlier correction with drop rows", "dimension":"ACCURACY"},
         {"id": "oc_impute_mean", "text": "Outlier correction with imputation (mean/mode)", "dimension":"ACCURACY"},
         {"id": "oc_impute_std", "text": "Outlier correction with imputation (standard deviation/mode)", "dimension":"ACCURACY"},
@@ -494,7 +500,7 @@ def save_and_apply():
 
 @app.route('/dataprofiling/<name>/<dirname>/<algorithm>/<support>/<confidence>/', methods=['GET', 'POST'])
 def data_profiling(name, dirname, algorithm, support, confidence):
-    time.sleep(5)
+    # time.sleep(5)
     # access selected_attributes from session
     col_list = session.get('selected_attributes', '0')
     columns=col_list
@@ -515,18 +521,23 @@ def data_profiling(name, dirname, algorithm, support, confidence):
     df = df[:][columns]
     columns_names= list(df.columns)
 
-    i = len(dataframes)
-    profile_path = (f'apps/report/profile_{i}.json')
-    if os.path.isfile(profile_path):
-        with open(f'apps/report/profile_{i}.json', "r") as f:
-            json_str = f.read()
-    else:
-        profile = ProfileReport(df)
-        profile.to_file(f'apps/report/profile_{i}.json')
-        with open(f'apps/report/profile_{i}.json', "r") as f:
-            json_str = f.read()
+
+    # code to generate a profile at each modification of the dataset
+    # i = len(dataframes)
+    # profile_path = (f'apps/report/profile_{i}.json')
+    # if os.path.isfile(profile_path):
+    #     with open(f'apps/report/profile_{i}.json', "r") as f:
+    #         json_str = f.read()
+    # else:
+    #     profile = ProfileReport(df)
+    #     profile.to_file(f'apps/report/profile_{i}.json')
+    #     with open(f'apps/report/profile_{i}.json', "r") as f:
+    #         json_str = f.read()
+
     
-    
+    # code for a single profile
+    with open(f'apps/report/profile.json', "r") as f:
+        json_str = f.read()
     # Parse the JSON string into a dictionary object
     profile = json.loads(json_str)
     typeList =[]

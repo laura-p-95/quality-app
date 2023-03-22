@@ -3,7 +3,146 @@
 {% block title %} Dashboard {% endblock %}
 
 <!-- Specific Page CSS goes HERE  -->
-{% block stylesheets %}{% endblock stylesheets %}
+{% block stylesheets %}
+<style>
+    body {
+        font-family: sans-serif;
+        background-color: #525f7f;
+    }
+
+    .file-upload {
+        background-color: #525f7f;
+        width: 400px;
+        margin: 0 auto;
+        padding: 20px;
+        border-radius: 4px;
+
+    }
+
+    .file-upload-btn {
+        width: 100%;
+        margin: 0;
+        color: #fff;
+        border: none;
+        padding: 10px;
+        border-radius: 4px;
+        border-bottom: 4px;
+        background-color: #e14eca;
+        border-color: #e14eca;
+        box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+        transition: all .2s ease;
+        outline: none;
+        text-transform: uppercase;
+        font-weight: 700;
+    }
+
+    .file-upload-btn:hover {
+
+        color: #ffffff;
+        transition: all .2s ease;
+        cursor: pointer;
+        background-color: #e14eca;
+        border-color: #e14eca;
+        background-image: linear-gradient(to bottom left, #e14eca, #ba54f5);
+    }
+
+    .file-upload-btn:active {
+        border: 0;
+        transition: all .2s ease;
+    }
+
+    .file-upload-content {
+        display: none;
+        text-align: center;
+    }
+
+    .file-upload-input {
+        position: absolute;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        outline: none;
+        opacity: 0;
+        cursor: pointer;
+    }
+
+    .csv-upload-wrap {
+        margin-top: 20px;
+        border: 2px dashed #db2dc0;
+        border-radius: 4px;
+        position: relative;
+    }
+
+    .csv-dropping,
+    .csv-upload-wrap:hover {
+
+        background-image: linear-gradient(to bottom left, #e14eca, #ba54f5) !important;
+        background-image: -moz-linear-gradient(to bottom left, #e14eca, #ba54f5) !important;
+        background-color: #e14eca;
+        border: 2px dashed #db2dc0;
+        color: #ffffff;
+    }
+
+    .csv-title {
+        color: #222;
+        font-size: 0.875rem;
+        font-weight: 400;
+    }
+
+    .csv-title-wrap {
+        padding: 0 15px 15px 15px;
+        color: #222;
+    }
+
+    .drag-text {
+        text-align: center;
+    }
+
+    .drag-text h3 {
+        font-weight: 100;
+        text-transform: uppercase;
+        color: #d725bb;
+        color: #ffffff;
+        padding: 60px 0;
+    }
+
+
+    .file-upload-csv {
+        max-height: 200px;
+        max-width: 200px;
+        margin: auto;
+        padding: 20px;
+    }
+
+    .remove-csv {
+        width: 200px;
+        margin: 0;
+        color: #fff;
+        background: #cd4535;
+        border: none;
+        padding: 10px;
+        border-radius: 4px;
+        border-bottom: 4px solid #b02818;
+        transition: all .2s ease;
+        outline: none;
+        text-transform: uppercase;
+        font-weight: 700;
+    }
+
+    .remove-csv:hover {
+        background: #c13b2a;
+        color: #ffffff;
+        transition: all .2s ease;
+        cursor: pointer;
+    }
+
+    .remove-csv:active {
+        border: 0;
+        transition: all .2s ease;
+    }
+</style>
+{% endblock stylesheets %}
 
 {% block content %}
 
@@ -31,17 +170,25 @@
                             <div class="col-lg ml-auto mr-auto">
                                 <div class="row">
                                     <div class="col-md-11 ">
-                                        <p>Select the features you are interested in processing (multiple choice is
+                                        <p>Select the features you are interested in processing (multiple choices are
                                             possible)</p>
+                                            <div class="col-lg ml-auto mr-auto">
+
+
                                         {% for col in columns %}
-                                        <tr>
-                                            <td>
-                                                <input type="checkbox" name="{{col}}" value="{{col}}"
-                                                    checked="checked">&nbsp;{{col}}<br>
-                                            </td>
-                                        </tr>
+                                        <div class="form-check form-check-inline">
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="checkbox" name="{{col}}"
+                                                    value="{{col}}" checked="checked">
+                                                {{col}}
+                                                <span class="form-check-sign"></span>
+                                            </label>
+                                        </div></br>
                                         {% endfor %}
-                                        </br>
+
+                                    </div>
+
+                                        
 
                                     </div>
                                 </div>
@@ -50,26 +197,45 @@
                         <div class="col-md-6">
                             <div class="card-header">
                                 <h5 class="card-category"></h5>
-                                <h3 class="card-title"><i class="tim-icons icon-vector"></i> Select the algorithm
-                                    (optional)</h3>
+                                <h3 class="card-title"><i class="tim-icons icon-atom"></i> Select the algorithm</h3>
                             </div>
 
                             <div class="col-lg ml-auto mr-auto">
                                 <div class="row">
                                     <div class="col-md-11">
+
                                         <p>Select the ML algorithm you intent on using. This selection is optional but
                                             not selecting it might leave problems in the data</p>
                                         </p>
-                                        <p><input type='radio' name='algorithm' value='DT' id='id1' checked="checked">
-                                            Decision Tree</p>
-                                        <p><input type='radio' name='algorithm' value='KNN' id='id2'> K-Nearest Neighbor
-                                        </p>
-                                        <p><input type='radio' name='algorithm' value='NB' id='id3'> Naive Bayes</p>
-                                        <p>
+
+                                        <div class="form-check form-check-radio form-check-inline">
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="radio" name='algorithm'
+                                                    id="id1" value="DT" checked="checked"> Decision Tree
+                                                <span class="form-check-sign"></span>
+                                            </label>
+                                        </div></br>
+                                        <div class="form-check form-check-radio form-check-inline">
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="radio" name='algorithm'
+                                                    id="id2" value="KNN" checked="checked"> K-Nearest Neighbor
+                                                <span class="form-check-sign"></span>
+                                            </label>
+                                        </div></br>
+                                        <div class="form-check form-check-radio form-check-inline">
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="radio" name='algorithm'
+                                                    id="id3" value="NB" checked="checked"> Naive Bayes
+                                                <span class="form-check-sign"></span>
+                                            </label>
+                                        </div>
+
+
+
                                     </div>
                                 </div>
                             </div>
-                            </br></br></br>
+                            </br>
                             <div class="card-header">
                                 <h5 class="card-category"></h5>
                                 <h3 class="card-title"><i class="tim-icons icon-vector"></i> Functional dependencies
@@ -94,40 +260,47 @@
                                         </td>
                                         <td>
                                             <input type="text" class="form-control" name="Confidence"
-                                                placeholder='Automatic value: 90'>
+                                                placeholder='90'>
                                         </td>
                                     </tr>
                                     </br>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-12 ">
-                            <input class="btn btn-primary btn-lg btn-block btn-group" type="submit" name="submit"
-                                value="Profiling">
+
+
+                    </div>
+                    <div class="row">
+                        <div class="col-lg ml-auto mr-auto">
+                            <div class="text-center">
+                                <input class="btn btn-primary btn-lg" type="submit" name="submit"
+                                    value="Profiling">
+                            </div>
                         </div>
+                    </div>
 
                 </form>
 
-                </br></br>
+
                 <!-- <canvas id="upload_dataset"></canvas> -->
             </div>
         </div>
     </div>
 
 
-</div>
 
-{% endblock content %}
 
-<!-- Specific Page JS goes HERE  -->
-{% block javascripts %}
+    {% endblock content %}
 
-<script>
-    $(document).ready(function () {
-        // Javascript method's body can be found in assets/js/demos.js
-        demo.initDashboardPageCharts();
+    <!-- Specific Page JS goes HERE  -->
+    {% block javascripts %}
 
-    });
-</script>
+    <script>
+        $(document).ready(function () {
+            // Javascript method's body can be found in assets/js/demos.js
+            demo.initDashboardPageCharts();
 
-{% endblock javascripts %}
+        });
+    </script>
+
+    {% endblock javascripts %}

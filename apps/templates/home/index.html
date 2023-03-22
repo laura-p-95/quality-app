@@ -3,7 +3,15 @@
 {% block title %} Dashboard {% endblock %}
 
 <!-- Specific Page CSS goes HERE  -->
-{% block stylesheets %}{% endblock stylesheets %}
+{% block stylesheets %}
+<style>h5, .h5 {
+    margin-bottom: 0rem;
+    font-family: inherit;
+    font-weight: 400;
+    line-height: 1.2;
+    color: #32325d; 
+    font-size: 1.0625rem;}</style>
+{% endblock stylesheets %}
 
 {% block content %}
 
@@ -14,27 +22,37 @@
         <div class="col-12">
             <div class="card card-chart">
                 <div class="card-header">
-                    <h5 class="card-category">Phese One</h5>
-                    <h3 class="card-title"><i class="tim-icons icon-cloud-upload-94"></i>Upload dataset</h3>
+                    <h3 class="card-title"></i>Quality-Aware Data Preparation</h3>
                 </div>
 
                 <div class="col-lg ml-auto mr-auto">
                     <div class="row">
-                        <div class="col-md-7">
-                            <p>here I explain what you can do. I also describe the example dataset and link to their
-                                websites:</br>
-                                <a href="https://archive.ics.uci.edu/ml/datasets/iris"> About the Iris Dataset</a></br>
-                                <a href="https://www.kaggle.com/datasets/nickhould/craft-cans"> About the Beer
-                                    Dataset</a>
+                        <div class="col-md-12">
+                            <p>This tool aims at guiding the data scientist through the operations of data exploration
+                                and
+                                data preparation of a dataset.
+                                There are four major sections:</p>
+                            <h5>Phase one: Dataset upload</h5>
+                            <p>Only csv files are allowed</br></p>
+                            <h5>Phase two: Selection of variables and Machine Learning algorithm, set functional
+                                dependencies</h5>
+                                <p>The user should select the Machine Learning algorithm they intend on using after the data
+                                    prepration phase</br></p> 
+                            <h5>Phase three: Data exploration</h5>
+                            <p>The data exploration section is divided into five subsections: </br></p>
+                            <p>A statistical overview of the dataset paired with a list of warnings that give a
+                                preview of the problems present in the dataset</br></p>
+                            <p>A statistical and visual overview of each variable</br></p>
+                            <p>A correlation heatmap between the numerical variables</p>
+                            <p>A missing values analysis with three different visual perspectives</br></p>
+                            <p>The accuracy inspection where the data scientist can define a new range of values for
+                                each numerical variable</br></p>
+                            <h5>Phase four: Data preparation</h5>
+                            <p>The user can build a pipeline of actions to perform on the dataset while also
+                                consulting the dataset.
+                                The actions are ordered by quality dimension. If the tool considers a quality dimension the
+                                most important to improve then it will be put before all the others </br></p>
 
-                                <!-- <form method=get action="{{ url_for('upload_sample', name='iris') }}">
-                                    <input class="btn btn-fill btn-primary font-icon-detail-small" type=submit>
-                                </form>
-                                <form method=get action="{{ url_for('upload_sample', name='beer') }}">
-                                    <input class="btn btn-fill btn-primary font-icon-detail-small" type=submit>
-                                </form> -->
-
-                            </p>
                             <div class="col-xs-12 col-xs-offset-0 col-sm-offset-3 col-sm-6">
                                 <a class="btn btn-primary btn-lg btn-block btn-group" href="{{ url_for('upload')}}"
                                     role="button">Get Started!</a>

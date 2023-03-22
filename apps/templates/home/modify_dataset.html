@@ -7,25 +7,27 @@
     list-style-type: none;
     margin: 0;
     padding: 5px;
-    border: 1px solid #525f7f;
-    background-color: #525f7f;
+    border: 2px solid #27293d;
+    background-color: #e6e6fa;
     width: 100%;
     min-height: 20px;
-    float: left; /* do not change the float */
+    float: left;
+    /* do not change the float */
     margin-right: 10px;
     border-radius: 8px;
   }
 
 
   #sortableList {
-    border: 1px solid #525f7f;
-    background-color: #525f7f;
+    border: 2px solid #27293d;
+    background-color: #e6e6fa;
     width: 100%;
     min-height: 40px;
     list-style-type: none;
     margin: 0;
     padding: 5px;
-    float: left; /* do not change the float */
+    float: left;
+    /* do not change the float */
     margin-right: 10px;
     border-radius: 8px;
   }
@@ -33,31 +35,41 @@
   #sortable1 li,
   #sortable2 li,
   #sortable3 li {
-    margin: 3px 3px 3px 3px;
-    padding: 1px;
+    margin: 5px;
+    padding: 9px 12px;
     float: left;
-    background-color: #8bbdf0;
-    width: 102px;
-    height: 90px;
+    border: 1px solid #636efa;
+    color: #27293d;
+    background-color: #a4adf8;
+    size: auto;
     cursor: move;
+    font-size: small;
 
-    font-size: smaller;
     text-align: center;
+    vertical-align: center;
     border-radius: 4px;
   }
+
+  /* #sortable1 li { background-color: #a0bad4; }
+  #sortable2 li { background-color: #edf1dd; }
+  #sortable3 li { background-color: #cba7ec; } */
 
 
   #sortableList li {
-    margin: 0 5px 5px 5px;
-    padding: 5px;
+    margin: 5px 5px 5px 5px;
+    padding: 9px 12px;
     font-size: small;
     cursor: move;
-    width: 98%;
+    width: max-content;
     border-radius: 4px;
-    background-color: #8bbdf0;
+    border: 1px solid #636efa;
+    background-color: #a4adf8;
+
+    color: #27293d;
   }
 
-  vr {
+
+  hr {
     width: 60%;
     margin-left: auto;
     margin-right: auto;
@@ -69,7 +81,8 @@
 {% endblock stylesheets %}
 
 {% block content %}
-
+{% set suggestion_num = namespace(value=2) %}
+{% set ranking_num = namespace(value=0) %}
 <div class="content">
   <div class="row">
     <div class="col-12">
@@ -87,7 +100,10 @@
             <div class="row">
 
               <div class="col-6">
+
                 <div class="col-lg ml-auto mr-auto text-center">
+                  <!-- <div class="row"><hr class="hr hr-blurry" color="#525f7f" />></div>
+                   -->
                   <ul class="nav nav-pills nav-pills-primary">
 
                     <li class="nav-item">
@@ -148,11 +164,20 @@
                       </ul>
                     </div>
 
-                    </br>
-                    <p>Build your pipeline:</p></br>
+                    </br></br></br></br>
+                    <p>Build your pipeline:</p>
 
                     <ul id="sortableList" class="connectedSortable">
+                      
+                      {% for tech in techniques %}
 
+                      {% if tech.dimension == average_rank[ranking_num.value] %}
+                      
+                      <li class="ui-state-default" id="{{tech.id}}">{{tech.text}}</li>
+                        {% set ranking_num.value = ranking_num.value + 1 %}
+                        {% endif %}
+                        {% endfor %}
+                        
                     </ul>
                   </div>
 
@@ -188,7 +213,7 @@
               <div class="col-lg ml-auto mr-auto">
                 <div class="text-center">
                   <input class="btn btn-fill btn-primary float-right " type="submit" name="submit"
-                    value="Download your csv file">
+                    value="Download your csv file"><i></i>
 
                 </div>
               </div>

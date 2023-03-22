@@ -1,2 +1,2 @@
 name,tuples,features,p_num_var,p_cat_var,p_duplicates,total_size,p_avg_dist,p_max_dist,p_min_dist,p_corr,max_pears,min_pears
-dataset,2410,5,0.6,0.4,0.0166,96528,0.2151,0.9564,0.0029,0.0,0.6706,0.0547
+dataset,2370,5,0.6,0.4,0.0004,113760,0.218,0.9726,0.0025,0.0,0.5028,0.052

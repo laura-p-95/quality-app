@@ -15,6 +15,8 @@
         width: 400px;
         margin: 0 auto;
         padding: 20px;
+        border-radius: 4px;
+
     }
 
     .file-upload-btn {
@@ -65,14 +67,15 @@
         cursor: pointer;
     }
 
-    .image-upload-wrap {
+    .csv-upload-wrap {
         margin-top: 20px;
         border: 2px dashed #db2dc0;
+        border-radius: 4px;
         position: relative;
     }
 
-    .image-dropping,
-    .image-upload-wrap:hover {
+    .csv-dropping,
+    .csv-upload-wrap:hover {
 
         background-image: linear-gradient(to bottom left, #e14eca, #ba54f5) !important;
         background-image: -moz-linear-gradient(to bottom left, #e14eca, #ba54f5) !important;
@@ -81,7 +84,13 @@
         color: #ffffff;
     }
 
-    .image-title-wrap {
+    .csv-title {
+        color: #222;
+        font-size: 0.875rem;
+        font-weight: 400;
+    }
+
+    .csv-title-wrap {
         padding: 0 15px 15px 15px;
         color: #222;
     }
@@ -99,14 +108,14 @@
     }
 
 
-    .file-upload-image {
+    .file-upload-csv {
         max-height: 200px;
         max-width: 200px;
         margin: auto;
         padding: 20px;
     }
 
-    .remove-image {
+    .remove-csv {
         width: 200px;
         margin: 0;
         color: #fff;
@@ -121,17 +130,25 @@
         font-weight: 700;
     }
 
-    .remove-image:hover {
+    .remove-csv:hover {
         background: #c13b2a;
         color: #ffffff;
         transition: all .2s ease;
         cursor: pointer;
     }
 
-    .remove-image:active {
+    .remove-csv:active {
         border: 0;
         transition: all .2s ease;
     }
+
+     h5, .h5 {
+  margin-bottom: 0rem;
+  font-family: inherit;
+  font-weight: 400;
+  line-height: 1.2;
+  color: #32325d; 
+  font-size: 1.0625rem;}
 </style>
 {% endblock stylesheets %}
 
@@ -145,72 +162,121 @@
         <div class="col-12">
             <div class="card card-chart">
                 <div class="card-header">
-                    <h5 class="card-category">Phese One</h5>
                     <h3 class="card-title"><i class="tim-icons icon-cloud-upload-94"></i>Upload dataset</h3>
                 </div>
 
-                <div class="col-lg ml-auto mr-auto">
-                    <div class="row">
-                        <div class="col-md-9">
-                            <p>here I explain what you can do. I also describe the example dataset and link to their
-                                websites:</br>
-                                <a href="https://archive.ics.uci.edu/ml/datasets/iris"> About the Iris Dataset</a></br>
-                                <a href="https://www.kaggle.com/datasets/nickhould/craft-cans"> About the Beer
-                                    Dataset</a>
 
-                            </p>
+                <div class="row">
+                    <div class="col-md-7">
+                        <div class="col-lg ml-auto mr-auto" color="white">
+                            <p>This tool aims at guiding the data scientist through the operations of data exploration
+                                and
+                                data preparation of a dataset.
+                                There are four major sections:</p>
+                            <h5>Phase one: Dataset upload</h5>
+                            <p>Only csv files are allowed</br></p>
+                            <h5>Phase two: Selection of variables and Machine Learning algorithm, set functional
+                                dependencies</h5>
+                                <p>The user should select the Machine Learning algorithm they intend on using after the data
+                                    prepration phase</br></p> 
+                            <h5>Phase three: Data exploration</h5>
+                            <p>The data exploration section is divided into five subsections: </br></p>
+                            <p>A statistical overview of the dataset paired with a list of warnings that give a
+                                preview of the problems present in the dataset</br></p>
+                            <p>A statistical and visual overview of each variable</br></p>
+                            <p>A correlation heatmap between the numerical variables</p>
+                            <p>A missing values analysis with three different visual perspectives</br></p>
+                            <p>The accuracy inspection where the data scientist can define a new range of values for
+                                each numerical variable</br></p>
+                            <h5>Phase four: Data preparation</h5>
+                            <p>The user can build a pipeline of actions to perform on the dataset while also
+                                consulting the dataset.
+                                The actions are ordered by quality dimension. If the tool considers a quality dimension the
+                                most important to improve then it will be put before all the others </br></p>
+
+
+
+
+
                         </div>
-                        
-                        <div class="col-md-3">
-                            <form method="post" enctype="multipart/form-data" action="{{ url_for('upload_file') }}"
+                    </div>
+
+                    <div class="col-5">
+                        <div class="col-lg ml-auto mr-auto">
+                            <!-- <form method="post" enctype="multipart/form-data" action="{{ url_for('upload_file') }}"
                                 type="button" class="btn btn-fill btn-primary">
                                 <br /><br /><br />
                                 <i class="tim-icons icon-cloud-upload-94"></i>
                                 <br /><br />Upload your dataset<br /><br /></i>
                                 <input type="file" name="file" />
                                 <input type="submit" value=Upload />
+                            </form> -->
+
+
+                            <form method="post" enctype="multipart/form-data" action="{{ url_for('upload_file') }}">
+                                <script class="jsbin"
+                                    src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+                                <div class="file-upload float-center">
+                                    <button class="file-upload-btn" type="button"
+                                        onclick="$('.file-upload-input').trigger( 'click' )" name="file">Add csv
+                                        file</button>
+
+                                    <div class="csv-upload-wrap">
+                                        <input class="file-upload-input" type='file' onchange="readURL(this);"
+                                            accept=".csv" name="file" />
+                                        <div class="drag-text">
+                                            <h3>Drag and drop a csv file or add csv file</h3>
+                                        </div>
+                                    </div>
+                                    <div class="file-upload-content">
+                                        <img src="/static/assets/img/csv_icon.png" class="img-fluid center-block"
+                                            heigth="120px" width="120px" src="#" alt="your csv" /></br><span
+                                            class="csv-title">Uploaded csv</span>
+
+                                        <div class="csv-title-wrap">
+                                            <input class="btn btn-danger" type="button_upload" value="Remove"
+                                                onclick="removeUpload()">
+                                            <input class="btn btn-primary " type="submit" name="submit" value=Upload>
+                                        </div>
+                                    </div>
+                                </div>
                             </form>
-
                         </div>
-
-
-                    </div></br>
+                    </div>
                 </div></br>
-
             </div>
         </div>
     </div>
-
-
-
 </div>
+
 
 {% endblock content %}
 
 <!-- Specific Page JS goes HERE  -->
 {% block javascripts %}
 
-<script>
+<!-- <script>
     $(document).ready(function () {
         // Javascript method's body can be found in assets/js/demos.js
         demo.initDashboardPageCharts();
 
     });
-</script>
+</script> -->
 
 <script>
+
     function readURL(input) {
         if (input.files && input.files[0]) {
 
             var reader = new FileReader();
 
             reader.onload = function (e) {
-                $('.image-upload-wrap').hide();
+                $('.csv-upload-wrap').hide();
 
-                $('.file-upload-image').attr('src', e.target.result);
+                $('.file-upload-csv').attr('src', e.target.result);
                 $('.file-upload-content').show();
 
-                $('.image-title').html(input.files[0].name);
+                $('.csv-title').html(input.files[0].name);
             };
 
             reader.readAsDataURL(input.files[0]);
@@ -223,13 +289,13 @@
     function removeUpload() {
         $('.file-upload-input').replaceWith($('.file-upload-input').clone());
         $('.file-upload-content').hide();
-        $('.image-upload-wrap').show();
+        $('.csv-upload-wrap').show();
     }
-    $('.image-upload-wrap').bind('dragover', function () {
-        $('.image-upload-wrap').addClass('image-dropping');
+    $('.csv-upload-wrap').bind('dragover', function () {
+        $('.csv-upload-wrap').addClass('csv-dropping');
     });
-    $('.image-upload-wrap').bind('dragleave', function () {
-        $('.image-upload-wrap').removeClass('image-dropping');
+    $('.csv-upload-wrap').bind('dragleave', function () {
+        $('.csv-upload-wrap').removeClass('csv-dropping');
     });
 
 </script>

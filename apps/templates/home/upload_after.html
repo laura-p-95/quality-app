@@ -4,44 +4,69 @@
     <div class="col-12">
         <div class="card card-chart">
             <div class="card-header">
-                <h5 class="card-category">Phese One</h5>
                 <h3 class="card-title"><i class="tim-icons icon-cloud-upload-94"></i>Upload dataset</h3>
             </div>
 
-            <div class="col-lg ml-auto mr-auto">
-                <div class="row">
-                    <div class="col-md-9">
-                        <p>here I explain what you can do. I also describe the example dataset and link to their
-                            websites:</br>
-                            <a href="https://archive.ics.uci.edu/ml/datasets/iris"> About the Iris Dataset</a></br>
-                            <a href="https://www.kaggle.com/datasets/nickhould/craft-cans"> About the Beer Dataset</a>
 
-                        </p>
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="col-lg ml-auto mr-auto">
+                        This tool aims at guiding the data scientist through the operations of data exploration and
+                            data preparation of a dataset.
+                            There are four major sections:</br>
+                            <b>Phase one: Dataset upload</b>
+                            </br>Only csv files are allowed</br>
+                            <b>Phase two: Selection of variables and Machine Learning algorithm, set functional
+                                dependencies</b></br>
+                            The user should select the Machine Learning algorithm they intend on using after the data
+                            prepration phase</br>
+                            <b>Phase three: Data exploration</b></br>
+                            The data exploration section is divided into five subsections: </br>
+                            A statistical overview of the dataset paired with a list of warnings that give a
+                            preview of the problems present in the dataset</br>
+                            A statistical and visual overview of each variable</br>
+                            A correlation heatmap between the numerical variables</br>
+                            A missing values analysis with three different visual perspectives</br>
+                            The accuracy inspection where the data scientist can define a new range of values for
+                            each numerical variable</br>
+                            <b>Phase four: Data preparation</b>
+                        </br>The user can build a pipeline of actions to perform on the dataset while also consulting the dataset. 
+                        The actions are ordered by quality dimension. If the tool considers a quality dimension the most important to improve then it will be put before all the others  </br>
+
+
+
+                            </br>
                     </div>
-                    <div class="col-md-3">
+                </div>
 
-                        <form disabled action="{{ url_for('upload_file') }}" enctype="multipart/form-data"
-                            action="{{ url_for('upload_file') }}" type="button" class="btn btn-fill btn-primary">
+                <div class="col-3">
+                    <div class="col-lg ml-auto mr-auto">
+                        <!-- <form method="post" enctype="multipart/form-data" action="{{ url_for('upload_file') }}"
+                            type="button" class="btn btn-fill btn-primary">
                             <br /><br /><br />
                             <i class="tim-icons icon-cloud-upload-94"></i>
                             <br /><br />Upload your dataset<br /><br /></i>
-                            <input type="file" id="file" name="file" />
+                            <input type="file" name="file" />
                             <input type="submit" value=Upload />
-                        </form>
+                        </form> -->
 
+                        <form method="post">
+                        <div class="row">
+                            <div class="col-lg ml-auto mr-auto">
+                              <div class="text-center">
+                                                    
+                                <input class="btn btn-primary btn-info float-right" type="submit" name="submit" id="upload-new"
+                                  value="Upload new dataset">
+                    
+                    
+                              </div>
+                            </div>
+                    
+                          </div>
+                        </form>
                     </div>
-                    <!-- 
-                    <div class="col-md-2 btn-group-vertical btn-group-toggle">
-                        <button disabled type="button" class="btn btn-fill btn-primary font-icon-detail-small"  name="iris">                                  
-                            <i class="tim-icons icon-cloud-upload-94"></i><br/><br/>Iris dataset
-                            
-                        </button>
-                        <button disabled type="button" class="btn btn-fill btn-primary font-icon-detail-small" name="beers">  
-                                <i class="tim-icons icon-cloud-upload-94"></i><br/><br/>Beer dataset
-                        </button>
-                    </div> -->
-                </div></br>
-            </div>
+                </div>
+            </div></br>
         </div>
     </div>
 </div>
@@ -50,4 +75,41 @@
 {% endblock content %}
 
 <!-- Specific Page JS goes HERE  -->
-{% block javascripts %}{% endblock javascripts %}
+{% block javascripts %}
+<script>
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('.csv-upload-wrap').hide();
+
+                $('.file-upload-csv').attr('src', e.target.result);
+                $('.file-upload-content').show();
+
+                $('.csv-title').html(input.files[0].name);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+
+        } else {
+            removeUpload();
+        }
+    }
+
+    function removeUpload() {
+        $('.file-upload-input').replaceWith($('.file-upload-input').clone());
+        $('.file-upload-content').hide();
+        $('.csv-upload-wrap').show();
+    }
+    $('.csv-upload-wrap').bind('dragover', function () {
+        $('.csv-upload-wrap').addClass('csv-dropping');
+    });
+    $('.csv-upload-wrap').bind('dragleave', function () {
+        $('.csv-upload-wrap').removeClass('csv-dropping');
+    });
+
+</script>
+{% endblock javascripts %}

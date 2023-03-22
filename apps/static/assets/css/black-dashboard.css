@@ -239,6 +239,7 @@ button,
 [type="button"],
 [type="buttonmaxwidth"],
 [type="groupbutton"],
+[type="button_upload"],
 [type="reset"],
 [type="submit"] {
   -webkit-appearance: button; }
@@ -256,6 +257,12 @@ button,
 }
 
 button,
+[type="button_upload"]{
+  width: 43%;
+  height: 100%;
+}
+
+button,
 [type="groupbutton"]{
   width: fit-content;
   
@@ -264,6 +271,7 @@ button,
 
 button:not(:disabled),
 [type="button"]:not(:disabled),
+[type="button_upload"]:not(:disabled),
 [type="buttonmaxwidth"]:not(:disabled),
 [type="reset"]:not(:disabled),
 [type="submit"]:not(:disabled) {
@@ -271,6 +279,7 @@ button:not(:disabled),
 
 button::-moz-focus-inner,
 [type="button"]::-moz-focus-inner,
+[type="button_upload"]::-moz-focus-inner,
 [type="buttonmaxwidth"]::-moz-focus-inner,
 [type="reset"]::-moz-focus-inner,
 [type="submit"]::-moz-focus-inner {
@@ -1531,12 +1540,14 @@ textarea.form-control {
 
 .form-check-input {
   position: absolute;
+  
   margin-top: 0.3rem;
   margin-left: -1.25rem; }
   .form-check-input:disabled ~ .form-check-label {
     color: #6c757d; }
 
 .form-check-label {
+  
   margin-bottom: 0; }
 
 .form-check-inline {
@@ -10995,6 +11006,7 @@ table.tablesorter thead tr .headerSortDown {
 .form-check .form-check-label {
   display: inline-block;
   position: relative;
+  font-size: 0.875rem;
   cursor: pointer;
   padding-left: 25px;
   line-height: 18px;
@@ -11005,6 +11017,7 @@ table.tablesorter thead tr .headerSortDown {
   padding-left: 28px; }
 
 .form-check-radio.form-check-inline .form-check-label {
+  font-size: 0.875rem;
   padding-left: 5px;
   margin-right: 10px; }
 
@@ -11049,7 +11062,8 @@ table.tablesorter thead tr .headerSortDown {
 .radio input[type="radio"] {
   opacity: 0;
   position: absolute;
-  visibility: hidden; }
+  visibility: hidden; 
+  font-size: medium;}
 
 .form-check input[type="checkbox"]:checked + .form-check-sign::after {
   opacity: 1;

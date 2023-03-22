@@ -19,8 +19,8 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h5 class="card-category">Phase three</h5>
-                    <h3 class="card-title"><i class="tim-icons icon-cloud-upload-94"></i>Accuracy Inspection
+                    <h5 class="card-category">Data Exploration</h5>
+                    <h3 class="card-title"></i>Accuracy Inspection
                     </h3>
                     <p>
                 </div>
@@ -77,8 +77,10 @@
                             <div class="row">
                                 <div class="col-lg ml-auto mr-auto">
                                     <div class="text-center">
+
                                         <input class="btn btn-fill btn-primary float-right " type="submit" name="submit"
-                                            value="Submit Outliers">
+                                            value="Submit Outliers" 
+                                            >
 
                                     </div>
                                 </div>
@@ -101,26 +103,7 @@
 <!-- Specific Page JS goes HERE  -->
 {% block javascripts %}
 
-<!-- <script>
-$(document).ready(function() {
-  $('#outlier-form').submit(function(event) {
-    event.preventDefault(); // Prevent default form submission
-    var formData = $(this).serialize(); // Serialize the form data
-    $.ajax({
-      type: 'POST',
-      url: '/submit-outliers',
-      data: formData,
-      success: function(response) {
-        console.log(response);
-      },
-      error: function(error) {
-        console.log(error);
-      }
-    });
-  });
-});
 
-</script> -->
 
 
 <script>
@@ -160,31 +143,22 @@ $(document).ready(function() {
 </script>
 
 <!-- <script>
-    $(function () {
-        $('#outlier-form').submit(function (event) {
-            // Prevent the default form submission behavior
-            event.preventDefault();
+    showNotification: function(from, align) {
+        color = Math.floor((Math.random() * 4) + 1);
 
-            // Serialize the form data into an array of key-value pairs
-            var formData = $(this).serializeArray();
+        $.notify({
+            icon: "tim-icons icon-bell-55",
+            message: "Welcome to <b>Black Dashboard</b> - a beautiful freebie for every web developer."
 
-            // Send the form data using AJAX
-            $.ajax({
-                type: 'POST',
-                url: '/process_outliers',
-                data: JSON.stringify(formData),
-                contentType: 'application/json',
-                success: function (response) {
-                    // Handle the successful response from the server
-                    console.log(response);
-                },
-                error: function (error) {
-                    // Handle the error response from the server
-                    console.log(error);
-                }
-            });
+        }, {
+            type: type[color],
+            timer: 8000,
+            placement: {
+                from: from,
+                align: align
+            }
         });
-    });
+    }
 </script> -->
 
 
