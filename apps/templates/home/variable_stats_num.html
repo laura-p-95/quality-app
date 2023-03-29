@@ -94,7 +94,7 @@
           <tr>
             <td><b>Median</b></td>
 
-            <td></td>
+            <td>{{medianList[count_num.value]}}</td>
           </tr>
           <tr>
             <td><b>Variance</b></td>
@@ -138,7 +138,10 @@
   <div class="col-6">
     <div class="row">
       <div class="col-lg ml-auto mr-auto">
-        {% include distr_html_list[count_num.value] %}
+        <div class="float-right">
+          {% include distr_html_list[count_num.value] %}
+        </div>
+        
       </div>
 
     </div>

@@ -30,7 +30,7 @@
                         </li>
 
                         {% for col in columns if not col==columns[0] %}
-
+                        &nbsp;&nbsp;
                         <li class="nav-item">
                             <a class="nav-link" data-toggle="tab" href="#{{col}}">
                                 {{col}}
@@ -49,6 +49,7 @@
                             <div class="tab-pane active" id="{{var}}">
                                 {% if var in typeNUMlist %}
                                 {% include 'home/variable_stats_num.html' %}
+                                
                                 {% include 'home/variable_stats_num_more.html' %}
                                 {% set count_num.value = count_num.value + 1 %}
 

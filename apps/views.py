@@ -170,7 +170,10 @@ def upload_file():
     dirpath = tempfile.mkdtemp(prefix='')
     filename = secure_filename(file_.filename)
     file_.save(os.path.join(dirpath, filename))
+    
     if request.method == 'POST':
+        (df, columns) = get_data(name, dirpath)
+        myPlots.table_df(df)
         return redirect(url_for('audit_file',
                             dirname=os.path.basename(dirpath),
                             name=name))
@@ -189,6 +192,7 @@ def upload_sample(name):
     dirpath = tempfile.mkdtemp(prefix='')
     dest_path = os.path.join(dirpath, filename)
     os.symlink(source_path, dest_path) 
+    
     return redirect(url_for('audit_file',
                             dirname=os.path.basename(dirpath),
                             name=name))
@@ -559,10 +563,12 @@ def data_profiling(name, dirname, algorithm, support, confidence, wants_support)
     # typeNUMlist = df.select_dtypes(include=['int64','float64']).columns
     minValueList = []
     maxValueList = []
+    medianList = []
     for var in columns:
         if var in typeNUMlist:
             minValueList.append(df[var].min())
             maxValueList.append(df[var].max()) 
+            medianList.append(round(df[var].median(),2))
 
     #plot generation
     outliers_html_list = myPlots.boxPlot(df, typeNUMlist)  #outlier plots
@@ -613,6 +619,9 @@ def data_profiling(name, dirname, algorithm, support, confidence, wants_support)
     
     if str(request.form.get("submit")) == "Modify choices":
         session.clear()
+        (df, columns) = get_data(name, os.path.basename(dirname))
+        myPlots.table_df(df)
+
         return redirect(url_for('audit_file', dirname=os.path.basename(dirname), name=name))
     
     if str(request.form.get("submit")) == "Download your csv file":
@@ -648,6 +657,7 @@ def data_profiling(name, dirname, algorithm, support, confidence, wants_support)
 
                                 min_values=min_values,
                                 max_values=max_values,
+                                medianList=medianList,
                                 uniqueness=uniqueness,
                                 accuracy=accuracy,
                                 completeness=completeness,

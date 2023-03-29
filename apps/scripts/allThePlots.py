@@ -41,10 +41,14 @@ def boxPlot(df,typeNUMlist):
             r=10,
             b=5,
             t=30
-        ),
-        font = dict(color = '#ced4da'),
-        paper_bgcolor="#27293d",
         )
+        )
+
+        #dark mode 
+        #fig.update_layout(paper_bgcolor="#27293d", font = dict(color = '#ced4da'), plot_bgcolor="#e6e6fa")
+        #light mode 
+        fig.update_layout(paper_bgcolor="#ffffff", font = dict(color = '#555'), plot_bgcolor="#e6e6fa")
+
         filename = f"apps/templates/home/Plots/boxPlot_{i}.html"
         name = f"home/Plots/boxPlot_{i}.html"
         pl.offline.plot(fig, filename = filename, auto_open=False)
@@ -73,17 +77,22 @@ def distributionPlot(df,typeNUMlist):
         fig = ff.create_distplot([data], [var])
 
         # Update the layout of the figure
-        fig.update_layout(xaxis_title='Value', yaxis_title='Density', width=500, height=400)
+        fig.update_layout(xaxis_title='Value', yaxis_title='Density', width=600, height=400)
+        
+        #dark mode 
+        # fig.update_layout(paper_bgcolor="#27293d", font = dict(color = '#ced4da'), plot_bgcolor="#e6e6fa")
+        #light mode 
+        fig.update_layout(paper_bgcolor="#ffffff", font = dict(color = '#555'), plot_bgcolor="#e6e6fa")
 
         # Add the figure to the list
         fig_list.append(fig)
 
     # Add each figure to the appropriate subplot
     for i, fig in enumerate(fig_list):
-        fig.update_layout(showlegend=False, font = dict(color = '#ced4da'), paper_bgcolor="#27293d", margin=dict(l=5, r=10, b=5, t=30))
+        fig.update_layout(showlegend=False, margin=dict(l=5, r=10, b=5, t=30))
         fig_json = fig.to_plotly_json()
         fig_obj = go.Figure(fig_json['data'], fig_json['layout'])
-        fig_obj.update_layout(height=300, width=500)
+        fig_obj.update_layout(height=300, width=600)
         fig_obj.update_traces(marker=dict(color='#1f77b4'))
         fig_obj.update_yaxes(title_text='Density')
         fig_obj.update_xaxes(title_text='Value')
@@ -110,8 +119,13 @@ def distributionCategorical(df,typeCATlist):
             vc = df[var].value_counts()
             vc_df = pd.DataFrame({'var': vc.index, 'count': vc.values})
             fig = px.bar(vc_df, x='var', y='count')
-            fig.update_layout(xaxis_title='Value', yaxis_title='Count', width=500, height=400, font = dict(color = '#ced4da'), paper_bgcolor="#27293d", margin=dict(l=5, r=10, b=5, t=30))
+            fig.update_layout(xaxis_title='Value', yaxis_title='Count', width=600, height=400, margin=dict(l=5, r=10, b=5, t=30))
             
+            #dark mode 
+            # fig.update_layout(paper_bgcolor="#27293d", font = dict(color = '#ced4da'), plot_bgcolor="#e6e6fa")
+            #light mode 
+            fig.update_layout(paper_bgcolor="#ffffff", font = dict(color = '#555'), plot_bgcolor="#e6e6fa")
+
             filename = f"apps/templates/home/Plots/barCATPlot_{num}.html"
             name = f"home/Plots/barCATPlot_{num}.html"
             pl.offline.plot(fig, filename = filename, auto_open=False)
@@ -131,7 +145,13 @@ def heatmap(df):
     # Create the heatmap trace using Plotly
     fig = px.imshow(h_table, x=h_table.index, y=h_table.columns, text_auto=True, aspect="auto")
     fig.update_xaxes(side="top")
-    fig.update_layout(font = dict(color = '#ced4da'), paper_bgcolor="#27293d", margin=dict(l=5, r=10, b=5, t=30))
+    fig.update_layout(margin=dict(l=5, r=10, b=5, t=30))
+
+    #dark mode 
+    #fig.update_layout(paper_bgcolor="#27293d", font = dict(color = '#ced4da'), plot_bgcolor="#e6e6fa")
+    #light mode 
+    fig.update_layout(paper_bgcolor="#ffffff", font = dict(color = '#555'), plot_bgcolor="#e6e6fa")
+
     pl.offline.plot(fig, filename = 'apps/templates/home/Plots/heatmap.html', auto_open=False)
     return fig
     
@@ -176,7 +196,11 @@ def missing_data(df, profile):
         bars_data.append(n_tot - n_missing)
 
     fig_bars = px.bar(bars_data, x=list(df.columns), y=bars_data, text_auto=True, color_continuous_scale='bupu')
-    fig_bars.update_layout(font = dict(color = '#ced4da'), paper_bgcolor="#27293d", margin=dict(l=5, r=10, b=5, t=30))
+    fig_bars.update_layout(margin=dict(l=5, r=10, b=5, t=30))
+    #dark mode 
+    #fig.update_layout(paper_bgcolor="#27293d", font = dict(color = '#ced4da'), plot_bgcolor="#e6e6fa")
+    #light mode 
+    fig_bars.update_layout(paper_bgcolor="#ffffff", font = dict(color = '#555'), plot_bgcolor="#e6e6fa")
     pl.offline.plot(fig_bars, filename = 'apps/templates/home/Plots/bars_missing_values.html', auto_open=False)
 
     #for the heatmap
@@ -185,28 +209,32 @@ def missing_data(df, profile):
     corr_mat = round(corr_mat,2)
     fig_heat = px.imshow(corr_mat, x=corr_mat.index, y=corr_mat.columns, aspect="auto", text_auto=True, color_continuous_scale='bupu')
     fig_heat.update_xaxes(side="top")
-    fig_heat.update_layout(autosize=True, font = dict(color = '#ced4da'), paper_bgcolor="#27293d", margin=dict(l=5, r=10, b=5, t=30))
+    fig_heat.update_layout(autosize=True, margin=dict(l=5, r=10, b=5, t=30))
+    #dark mode 
+    #fig.update_layout(paper_bgcolor="#27293d", font = dict(color = '#ced4da'), plot_bgcolor="#e6e6fa")
+    #light mode 
+    fig_heat.update_layout(paper_bgcolor="#ffffff", font = dict(color = '#555'), plot_bgcolor="#e6e6fa")
     pl.offline.plot(fig_heat, filename = 'apps/templates/home/Plots/heatmap_missing_values.html', auto_open=False)
 
 
-def treePlot(df, typeCATlist):
-    html_files = []
-    num=0
+# def treePlot(df, typeCATlist):
+#     html_files = []
+#     num=0
       
 
-    for var in typeCATlist:
-            vc = df[var]
-            vc_df = pd.DataFrame({'var': vc.index, 'info': vc.values})
-            fig = px.treemap(vc_df.head(30), path=['var'], values='info')
-            fig.update_layout(width=500, autosize=True, font=dict(color='#ced4da'), paper_bgcolor="#27293d", margin=dict(l=5, r=10, b=5, t=30))
+#     for var in typeCATlist:
+#             vc = df[var]
+#             vc_df = pd.DataFrame({'var': vc.index, 'info': vc.values})
+#             fig = px.treemap(vc_df.head(30), path=['var'], values='info')
+#             fig.update_layout(width=500, autosize=True, font=dict(color='#ced4da'), paper_bgcolor="#27293d", margin=dict(l=5, r=10, b=5, t=30))
     
-            filename = f"apps/templates/home/Plots/barCATPlot_{num}.html"
-            name = f"home/Plots/barCATPlot_{num}.html"
-            pl.offline.plot(fig, filename = filename, auto_open=True)
-            html_files.append(name)
-            num=num+1
+#             filename = f"apps/templates/home/Plots/barCATPlot_{num}.html"
+#             name = f"home/Plots/barCATPlot_{num}.html"
+#             pl.offline.plot(fig, filename = filename, auto_open=True)
+#             html_files.append(name)
+#             num=num+1
     
-    return html_files
+#     return html_files
 
 
 def table_df(df):
@@ -223,10 +251,13 @@ def table_df(df):
                 align='left',
                 font = dict(color = '#555')))
     ])
-    fig.update_layout(autosize=True, height=700,
-                      paper_bgcolor="#27293d", margin=dict(l=5, r=10, b=5, t=30)
-                    
-                      )
+    fig.update_layout(autosize=True, height=650, margin=dict(l=10, r=10, b=10, t=30))
+    
+    #dark mode 
+    #fig.update_layout(paper_bgcolor="#27293d")
+    #light mode 
+    fig.update_layout(paper_bgcolor="#ffffff")
+
     pl.offline.plot(fig, filename = 'apps/templates/home/Plots/table_df.html', auto_open=False)
 
 

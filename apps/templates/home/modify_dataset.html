@@ -108,17 +108,17 @@
 
                     <li class="nav-item">
                       <a class="nav-link active" data-toggle="tab" href="#{{average_rank[0]}}">
-                        {{average_rank[0]}}
+                        {{"1. "}}{{average_rank[0]}}
                       </a>
                     </li>&nbsp;&nbsp;
                     <li class="nav-item">
                       <a class="nav-link" data-toggle="tab" href="#{{average_rank[1]}}">
-                        {{average_rank[1]}}
+                        {{"2. "}}{{average_rank[1]}}
                       </a>
                     </li>&nbsp;&nbsp;
                     <li class="nav-item">
                       <a class="nav-link" data-toggle="tab" href="#{{average_rank[2]}}">
-                        {{average_rank[2]}}
+                        {{"3. "}}{{average_rank[2]}}
                       </a>
                     </li>
 
@@ -128,11 +128,8 @@
 
                 <div class="col-lg ml-auto mr-auto">
                   <p>Here are all the possible adjustments you can apply to your dataset.
-                    Imputation is the process of replacing missing data with substituted values.
-                    The values in the braces describe what type of value will substitute the missing data.
-                    For example (mean/mode) will have all missing values in numric columns substituted by the mean of
-                    the known values,
-                    the categorical columns will instead use the mode</p>
+                    The values in the braces describe what type of data preparation method will be applied.
+                  </p>
                   <div class="tab-content tab-space">
                     <div class="tab-pane active" id="{{average_rank[0]}}">
                       <ul id="sortable1" class="connectedSortable">
@@ -165,6 +162,7 @@
                     </div>
 
                     </br></br></br></br>
+                    &nbsp;
                     <p>Build your pipeline:</p>
 
                     <ul id="sortableList" class="connectedSortable">
@@ -210,10 +208,10 @@
                   <div class="row">
                     <div class="col-lg ml-auto mr-auto">
                       <div class="text-center"></br>
-                        <input class="btn btn-primary btn-info " type="submit" name="submit" id="go-back"
+                        <input class="btn btn-secondary" type="submit" name="submit" id="go-back"
                           value="Go Back">&nbsp;&nbsp;&nbsp;
 
-                        <input class="btn btn-secondary btn-info " type="submit" name="submit" id="save-and-apply"
+                        <input class="btn btn-primary" type="submit" name="submit" id="save-and-apply"
                           value="Apply modifications">
 
 
@@ -230,17 +228,21 @@
 
 
                 {% include 'home/Plots/table_df.html' %}
+                
               </div>
+              
+
             </div>
-            <div class="row">
+            <div class="card-footer">
               <div class="col-lg ml-auto mr-auto">
                 <div class="text-center">
-                  <input class="btn btn-fill btn-primary float-right " type="submit" name="submit"
+                  <input class="btn btn-fill btn-primary float-center " type="submit" name="submit"
                     value="Download your csv file"><i></i>
 
                 </div>
               </div>
             </div>
+            
 
           </form>
         </div>

@@ -9,63 +9,47 @@
 
 
             <div class="row">
-                <div class="col-md-9">
+                <div class="col-md-10">
                     <div class="col-lg ml-auto mr-auto">
                         This tool aims at guiding the data scientist through the operations of data exploration and
-                            data preparation of a dataset.
-                            There are four major sections:</br>
-                            <b>Phase one: Dataset upload</b>
-                            </br>Only csv files are allowed</br>
-                            <b>Phase two: Selection of variables and Machine Learning algorithm, set functional
-                                dependencies</b></br>
-                            The user should select the Machine Learning algorithm they intend on using after the data
-                            prepration phase</br>
-                            <b>Phase three: Data exploration</b></br>
-                            The data exploration section is divided into five subsections: </br>
-                            A statistical overview of the dataset paired with a list of warnings that give a
-                            preview of the problems present in the dataset</br>
-                            A statistical and visual overview of each variable</br>
-                            A correlation heatmap between the numerical variables</br>
-                            A missing values analysis with three different visual perspectives</br>
-                            The accuracy inspection where the data scientist can define a new range of values for
-                            each numerical variable</br>
-                            <b>Phase four: Data preparation</b>
-                        </br>The user can build a pipeline of actions to perform on the dataset while also consulting the dataset. 
-                        The actions are ordered by quality dimension. If the tool considers a quality dimension the most important to improve then it will be put before all the others  </br>
-
-
-
-                            </br>
+                        data preparation of a dataset.
+                        There are four major sections:</br>
+                        </br>
+                        <b>Phase one: Dataset upload</b></br>
+                        </br>
+                        <b>Phase two: Selection of variables and Machine Learning algorithm</b></br>
+                        </br>
+                        <b>Phase three: Data exploration</b></br>
+                        </br>
+                        <b>Phase four: Data preparation</b>
+                        </br>The user can build a pipeline of actions to perform on the dataset while also consulting
+                        the dataset.
+                        The actions are ordered by quality dimension. If the tool considers a quality dimension the most
+                        important to improve then it will be put before all the others </br>
                     </div>
                 </div>
-
-                <div class="col-3">
-                    <div class="col-lg ml-auto mr-auto">
-                        <!-- <form method="post" enctype="multipart/form-data" action="{{ url_for('upload_file') }}"
-                            type="button" class="btn btn-fill btn-primary">
-                            <br /><br /><br />
-                            <i class="tim-icons icon-cloud-upload-94"></i>
-                            <br /><br />Upload your dataset<br /><br /></i>
-                            <input type="file" name="file" />
-                            <input type="submit" value=Upload />
-                        </form> -->
-
-                        <form method="post">
-                        <div class="row">
+                <div class="col-md-2">
+                    <form method="post">
+                        <div class="card-footer">
                             <div class="col-lg ml-auto mr-auto">
-                              <div class="text-center">
-                                                    
-                                <input class="btn btn-primary btn-info float-right" type="submit" name="submit" id="upload-new"
-                                  value="Upload new dataset">
-                    
-                    
-                              </div>
+                                <div class="text-center">
+
+                                    <input class="btn btn-primary float-right" type="submit" name="submit"
+                                        id="upload-new" value="Upload new dataset">
+
+
+                                </div>
                             </div>
-                    
-                          </div>
-                        </form>
-                    </div>
+
+                        </div>
+                    </form>
+
                 </div>
+
+
+
+
+
             </div></br>
         </div>
     </div>

@@ -47,7 +47,7 @@ def rank_kb(df, algorithm):
     return ranking_kb
 
 def rank_dim(accuracy, uniqueness, completeness):
-    ordered_values = sorted([accuracy, uniqueness, completeness])
+    ordered_values = sorted([accuracy, uniqueness, completeness], reverse=True)
     ranking_dim = []
     for i in range(3):
         if ordered_values[i] == accuracy:
@@ -100,7 +100,7 @@ def average_ranking(ranking_kb, ranking_dim):
             if i==2: uniqueness = uniqueness +  0.5 * 10
     
 
-    sort = sorted([accuracy, uniqueness, completeness])
+    sort = sorted([accuracy, uniqueness, completeness], reverse=True)
     ranking=[]
     for i in range(3):
         if sort[i] == accuracy:
